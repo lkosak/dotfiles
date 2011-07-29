@@ -1,0 +1,1 @@
+/Users/lkosak/Sites/my-environment/.vim
