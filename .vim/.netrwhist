@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/lou/Sites/pinchit'
+let g:netrw_dirhist_2='/Users/lou/.vim/bundle/command-t'
+let g:netrw_dirhist_3='/Users/lou/Sites/pinchit'
+let g:netrw_dirhist_4='/Users/lou/.rvm'
+let g:netrw_dirhist_5='/Users/lou/Sites/codebreaker/features/step_definitions'
+let g:netrw_dirhist_6='/Users/lou/Sites/codebreaker/spec/codebreaker'
+let g:netrw_dirhist_7='/Users/lou/Sites/chef-repo'
+let g:netrw_dirhist_8='/Users/lou/.rvm/gems/ruby-1.9.2-p180@rails3/gems/actionpack-3.0.9'
