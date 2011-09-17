@@ -1,6 +1,6 @@
 "automatically load NERDtree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
 
 behave mswin
 
@@ -10,7 +10,6 @@ set colorcolumn=80
 
 set gfn=Menlo:h13
 colorscheme solarized
-set background=light
 
 " disable toolbar
 set guioptions=egmrt

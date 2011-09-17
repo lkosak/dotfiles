@@ -42,14 +42,13 @@ at_strikeoff=%{$'\e[29m'%}
  
  
 PROMPT="${fg_lgreen}%n@${at_underl}%m${at_underloff}${fg_white}[${fg_cyan}%~${fg_white}]"
- 
+
 #Set the auto completion on
 autoload -U compinit
 compinit
  
 #Lets set some options
-setopt correctall
-setopt autocd
+#setopt autocd
 setopt auto_resume
  
 ## Enables the extgended globbing features
@@ -71,3 +70,23 @@ export MYSQL_PS1="\R:\m:\s \h [\d]> "
 
 export PATH="$HOME/bin:$PATH"
 
+setopt noautomenu
+
+# Set Apple Terminal.app resume directory
+if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
+  function chpwd {
+    local SEARCH=' '
+    local REPLACE='%20'
+    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
+    printf '\e]7;%s\a' $PWD_URL
+  }
+
+  chpwd
+}
+
+export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH" 
+
+alias cuke="clear && bundle exec cucumber --require features"
+alias v="mvim"
+alias spec="clear && bundle exec rspec --format d" 
+alias remigrate="rake db:migrate && rake db:test:prepare"

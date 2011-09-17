@@ -31,9 +31,13 @@ set laststatus=2
 set number
 "set undofile
 
+set foldmethod=syntax
+set foldnestmax=5
+set foldlevel=50
+set foldcolumn=1
+
 set ignorecase
 set smartcase
-set gdefault
 set incsearch
 set showmatch
 set hlsearch
@@ -62,7 +66,7 @@ syntax on
 
 map <leader><tab> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-map <leader>q :vertical res 30<CR> 
+"map <leader>q :vertical res 30<CR> 
 
 " commandt flush
 map <leader>f :CommandTFlush<CR>
@@ -77,6 +81,19 @@ set directory=~/.vim/backups
 set directory=~/.vim/backups
 
 " Use HTML syntax for all views
-autocmd BufRead,BufNewFile ~/Sites/pinchit/application/views/* set filetype=html
 
 colorscheme molokai
+
+set noshowmatch
+
+" map esc to jj
+inoremap jj <esc>
+
+" fast editing of the vimrc
+nnoremap <leader>ev :e $MYVIMRC<cr>
+
+" space to command
+nnoremap <space> :
+
+" set automatic filetype for *.rabl
+autocmd BufNewFile,BufReadPre *.rabl set filetype=ruby
