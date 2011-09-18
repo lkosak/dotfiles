@@ -40,8 +40,12 @@ at_blinkoff=%{$'\e[25m'%}
 at_reverseoff=%{$'\e[27m'%}
 at_strikeoff=%{$'\e[29m'%}
  
- 
-PROMPT="${fg_lgreen}%n@${at_underl}%m${at_underloff}${fg_white}[${fg_cyan}%~${fg_white}]"
+git_prompt_info() {
+  ref=$(git-symbolic-ref HEAD 2> /dev/null) || return
+  echo "(${ref#refs/heads/})"
+}
+
+PROMPT="${fg_lgreen}%n@${at_underl}%m${at_underloff}${fg_white}[${fg_cyan}%~${fg_white}] $(git_prompt_info)"
 
 #Set the auto completion on
 autoload -U compinit
