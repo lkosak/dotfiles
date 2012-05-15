@@ -10,6 +10,7 @@ set colorcolumn=80
 
 set gfn=Menlo:h13
 colorscheme solarized
+set background=light
 
 " disable toolbar
 set guioptions=egmrt
