@@ -72,6 +72,9 @@ alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 # Fix forward delete
 bindkey "^[[3~" delete-char 
 
+# disable flow control to allow <C-s> in vim
+stty -ixon -ixoff
+
 # DB syncage
 alias ppdb_capture="echo -n \"Creating dump on production server...\" && ssh pinchit.com '/home/lou/dump.sh' && echo \"done.\""
 alias ppdb_download="echo \"Downloading dump...\" && rsync -avzL --progress --safe-links -e 'ssh -p 9922' lou@pinchit.com:/home/lou/.dumps/pinchit-production-latest ~/.dumps/ && echo \"...done.\""
