@@ -1,5 +1,7 @@
 " Try to use better color palettej
 set t_Co=256
+colorscheme solarized
+set bg=light
 
 " Load pathogen
 filetype off
@@ -35,6 +37,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set colorcolumn=80
 
 " textmate style whitespace charts (show tabs and spaces)
 set list listchars=tab:▸\ ,trail:· "show trailing whitespace
@@ -43,7 +46,7 @@ set list listchars=tab:▸\ ,trail:· "show trailing whitespace
 set foldmethod=syntax
 set foldnestmax=5
 set foldlevel=50
-set foldcolumn=1
+set foldcolumn=0
 
 " Disables matchparen -- for performance reasons
 let loaded_matchparen = 1
@@ -76,6 +79,9 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
+" Solarized bg flipper
+call togglebg#map("<F5>")
+
 " --------------------------------------------------------
 " Filetype stuff
 " --------------------------------------------------------
@@ -97,30 +103,30 @@ set splitright
 " ctrl-based navigation of splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j<C-W>_
-nnoremap <C-k> <C-w>k<C-W>_
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 " Set minheights to work with horizontal split navigation
-if !&diff
-  " we have to have a winheight bigger than we want to set winminheight, but if
-  " we set winheight to be huge before winminheight, winminheight set will always
-  " fail
-  set winheight=5
-  set winminheight=5
-  set winheight=999
-endif
+" if !&diff
+"   " we have to have a winheight bigger than we want to set winminheight, but if
+"   " we set winheight to be huge before winminheight, winminheight set will always
+"   " fail
+"   set winheight=5
+"   set winminheight=5
+"   set winheight=999
+" endif
 
 " --------------------------------------------------------
 " Editing .vimrc
 " --------------------------------------------------------
 
 " leader-v to open vimrc in a split
-nmap <leader>v :sp ~/.vimrc<cr>
+nmap <leader>ev :sp ~/.vimrc<cr>
 
 " Automatically reload vimrc on save
 augroup myvimrchooks
-    au!
-    autocmd bufwritepost .vimrc source ~/.vimrc
+  au!
+  autocmd bufwritepost .vimrc source ~/.vimrc
 augroup END
 
 " --------------------------------------------------------
@@ -132,6 +138,8 @@ nnoremap <leader>a :Ack
 
 " Setup leader for Commant-T
 nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+
+set wildignore=node_modules/**
 
 " Fix esc and cursor key navigation in command-t
 set ttimeoutlen=50
@@ -149,28 +157,57 @@ function! RunRailsTest()
   :w " Save file
 
   let file = expand("%")
-  let basepath = getcwd()
-
   let in_test_file = match(file, '\(.feature\|_spec.rb\|_test.rb\)$') != -1
 
-  if !in_test_file
-    " Come up with a best guess search path
-    let search_fname = fnamemodify(file, ":s?^app/??:s?.rb$?_spec.rb?")
-    " Search for that shit
-    let result = globpath(basepath."/spec", "**/".search_fname)
-
-    if empty(result)
-      echo "Couldn't locate test file"
-      return
-    end
-
-    " Get first match (globpath returns a \n separated list)
-    let file = split(result, "\n")[0]
-    " Make it relative to the current dir (for display purposes)
-    let file = fnamemodify(file, ":.")
+  if in_test_file
+    let test_file = file
+  else
+    let test_file = FindTestFile(file)
   end
 
-  exec ":!clear && echo 'Running ".file."' && time ruby " . file
+  if !empty(test_file)
+    exec ":!clear && echo 'Running ".test_file."' && time ruby " . test_file
+  else
+    echo "Couldn't locate test file"
+  end
+endfunction
+
+function! SwitchToTestFile()
+  let file = expand("%")
+  let in_test_file = match(file, '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+
+  if in_test_file
+    return
+  end
+
+  let test_file = FindTestFile(file)
+
+  if !empty(test_file)
+    exec ':e ' . test_file
+  else
+    echo "Couldn't locate test file"
+  end
+endfunction
+
+function! FindTestFile(file)
+  let basepath = getcwd()
+
+  " Come up with a best guess search path
+  let search_fname = fnamemodify(a:file, ":s?^app/??:s?.rb$?_spec.rb?")
+  " Search for that shit
+  let result = globpath(basepath."/spec", "**/".search_fname)
+
+  if empty(result)
+    return
+  end
+
+  " Get first match (globpath returns a \n separated list)
+  let file = split(result, "\n")[0]
+  " Make it relative to the current dir (for display purposes)
+  let file = fnamemodify(file, ":.")
+
+  return file
 endfunction
 
 nmap <leader>t :call RunRailsTest()<cr>
+nmap <leader>gt :call SwitchToTestFile()<cr>

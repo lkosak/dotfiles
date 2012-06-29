@@ -1,0 +1,25 @@
+[user]
+	name = Lou Kosak
+	email = lkosak@gmail.com
+[core]
+	editor = /usr/bin/vim
+[color]
+	status = auto
+	diff = auto
+[alias]
+  a = add
+  s = status
+  d = diff
+  c = commit
+  b = branch
+  co = checkout
+  l = smart-log --all
+
+[format]
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset	
+[difftool "Kaleidoscope"]
+  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[diff]
+  tool = Kaleidoscope

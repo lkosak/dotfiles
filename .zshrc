@@ -40,9 +40,11 @@ unsetopt correct_all
 setopt noautomenu
 
 # History FOREVER
-HISTFILE=~/.zshis
+HISTFILE=~/.zshistory
 HISTSIZE=1000000
 SAVEHIST=1000000
+setopt append_history
+unsetopt share_history
 
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  
@@ -64,10 +66,6 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
 
 # Node the node
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH" 
-
-# Postgres has silly start and stop commands
-alias pg_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 
 # Fix forward delete
 bindkey "^[[3~" delete-char 
