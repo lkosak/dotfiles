@@ -80,7 +80,7 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 " Solarized bg flipper
-call togglebg#map("<F5>")
+" call togglebg#map("<F5>")
 
 " --------------------------------------------------------
 " Filetype stuff
