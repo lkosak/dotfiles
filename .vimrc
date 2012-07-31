@@ -1,7 +1,7 @@
 " Try to use better color palettej
+set bg=light
 set t_Co=256
 colorscheme solarized
-set bg=light
 
 " Load pathogen
 filetype off
@@ -88,9 +88,19 @@ vnoremap <F1> <ESC>
 
 " set automatic filetype for *.rabl
 autocmd BufNewFile,BufReadPre *.rabl set filetype=ruby
-
 " set automatic filetype for views
 autocmd BufRead,BufReadPre ~/Sites/pinchit/application/views/* set filetype=html
+autocmd BufNewFile,BufReadPre *.sass set filetype=sass
+autocmd BufNewFile,BufReadPre *.hamlc set filetype=haml
+
+" --------------------------------------------------------
+" Jump to last line edited when re-opening files
+" --------------------------------------------------------
+
+" if has("autocmd")
+"   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+"     \| exe "normal g'\"" | endif
+" endif 
 
 " --------------------------------------------------------
 " Splits!
@@ -153,61 +163,90 @@ endif
 " Ruby test runner
 " --------------------------------------------------------
 
-function! RunRailsTest()
-  :w " Save file
-
-  let file = expand("%")
-  let in_test_file = match(file, '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-
-  if in_test_file
-    let test_file = file
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SWITCH BETWEEN TEST AND PRODUCTION CODE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':e ' . new_file
+endfunction
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  let in_spec = match(current_file, '^spec/') != -1
+  let going_to_spec = !in_spec
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<exhibits\>') != -1 || match(current_file, '\<services\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1
+  if going_to_spec
+    if in_app
+      let new_file = substitute(new_file, '^app/', '', '')
+    end
+    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
+    let new_file = 'spec/' . new_file
   else
-    let test_file = FindTestFile(file)
-  end
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '^spec/', '', '')
+    if in_app
+      let new_file = 'app/' . new_file
+    end
+  endif
+  return new_file
+endfunction
+nnoremap <leader>et :call OpenTestAlternate()<cr>
 
-  if !empty(test_file)
-    exec ":!clear && echo 'Running ".test_file."' && time ruby " . test_file
-  else
-    echo "Couldn't locate test file"
-  end
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :call RunTestFile()<cr>
+map <leader>rt :call RunNearestTest()<cr>
+map <leader>. :call RunTests('')<cr>
+map <leader>c :w\|:!script/acceptance<cr>
+map <leader>w :w\|:!script/acceptance --profile wip<cr>
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    if in_test_file
+        call SetTestFile()
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
-function! SwitchToTestFile()
-  let file = expand("%")
-  let in_test_file = match(file, '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-
-  if in_test_file
-    return
-  end
-
-  let test_file = FindTestFile(file)
-
-  if !empty(test_file)
-    exec ':e ' . test_file
-  else
-    echo "Couldn't locate test file"
-  end
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
-function! FindTestFile(file)
-  let basepath = getcwd()
-
-  " Come up with a best guess search path
-  let search_fname = fnamemodify(a:file, ":s?^app/??:s?.rb$?_spec.rb?")
-  " Search for that shit
-  let result = globpath(basepath."/spec", "**/".search_fname)
-
-  if empty(result)
-    return
-  end
-
-  " Get first match (globpath returns a \n separated list)
-  let file = split(result, "\n")[0]
-  " Make it relative to the current dir (for display purposes)
-  let file = fnamemodify(file, ":.")
-
-  return file
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
 endfunction
 
-nmap <leader>t :call RunRailsTest()<cr>
-nmap <leader>gt :call SwitchToTestFile()<cr>
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/acceptance " . a:filename
+    else
+        if filereadable("script/test.rb")
+            exec ":!ruby script/test.rb " . a:filename
+        elseif filereadable("Gemfile")
+            exec ":!bundle exec rspec --color " . a:filename
+        else
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
