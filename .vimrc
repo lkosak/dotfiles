@@ -1,5 +1,5 @@
 " Try to use better color palettej
-set bg=dark
+set bg=light
 set t_Co=256
 colorscheme solarized
 
