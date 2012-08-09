@@ -1,0 +1,4 @@
+--type-set=mustache=.mustache
+--type-set=css=.css,.scss,.less
+--type-set=html=.html,.haml,.hamlc
+--type-set=js=.js,.coffee
