@@ -2,3 +2,4 @@
 --type-set=css=.css,.scss,.less
 --type-set=html=.html,.haml,.hamlc
 --type-set=js=.js,.coffee
+--type-set=cucumber=.feature

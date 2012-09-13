@@ -92,6 +92,7 @@ autocmd BufNewFile,BufReadPre *.rabl set filetype=ruby
 autocmd BufRead,BufReadPre ~/Sites/pinchit/application/views/* set filetype=html
 autocmd BufNewFile,BufReadPre *.sass set filetype=sass
 autocmd BufNewFile,BufReadPre *.hamlc set filetype=haml
+autocmd BufNewFile,BufReadPre *.hamstache set filetype=haml
 
 " --------------------------------------------------------
 " Jump to last line edited when re-opening files
@@ -127,6 +128,14 @@ nnoremap <C-k> <C-w>k
 " endif
 
 " --------------------------------------------------------
+" Navigation
+" --------------------------------------------------------
+
+" These don't seem to work :(
+" nmap <M-h> :tabprevious<CR>
+" nmap <M-l> :tabnext<CR>
+
+" --------------------------------------------------------
 " Editing .vimrc
 " --------------------------------------------------------
 
@@ -158,6 +167,8 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
+
+nmap <leader><tab> :NERDTreeToggle<CR>
 
 " --------------------------------------------------------
 " Ruby test runner
@@ -199,7 +210,7 @@ nnoremap <leader>et :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>rt :call RunNearestTest()<cr>
 map <leader>. :call RunTests('')<cr>
-map <leader>c :w\|:!script/acceptance<cr>
+map <leader>c :w\|:!cucumber %<cr>
 map <leader>w :w\|:!script/acceptance --profile wip<cr>
 
 function! RunTestFile(...)
