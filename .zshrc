@@ -49,9 +49,6 @@ unsetopt share_history
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  
  
-# Pathypath
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/Cellar/vim/7.3.333/bin:/Users/lkosak/pear/bin:$PATH"
-
 # Set Apple Terminal.app resume directory
 if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
  function chpwd {
@@ -63,9 +60,6 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
 
  chpwd
 }
-
-# Node the node
-export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH" 
 
 # Fix forward delete
 bindkey "^[[3~" delete-char 
