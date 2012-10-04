@@ -250,14 +250,8 @@ function! RunTests(filename)
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     if match(a:filename, '\.feature$') != -1
-        exec ":!script/acceptance " . a:filename
+      exec ":!script/acceptance " . a:filename
     else
-        if filereadable("script/test.rb")
-            exec ":!ruby script/test.rb " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
+      exec ":!zeus rspec --color " . a:filename
     end
 endfunction

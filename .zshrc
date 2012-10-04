@@ -72,3 +72,5 @@ alias ppdb_capture="echo -n \"Creating dump on production server...\" && ssh pin
 alias ppdb_download="echo \"Downloading dump...\" && rsync -avzL --progress --safe-links -e 'ssh -p 9922' lou@pinchit.com:/home/lou/.dumps/pinchit-production-latest ~/.dumps/ && echo \"...done.\""
 alias ppdb_load="~/.dumps/load.sh"
 alias ppdb_sync="ppdb_capture && ppdb_download & ppdb_load"
+
+alias tmux="TERM=screen-256color-bce tmux"

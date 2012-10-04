@@ -31,12 +31,12 @@
 [submodule ".vim/bundle/vim-powerline"]
 	path = .vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/vim-eunuch"]
 	path = .vim/bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
 [submodule ".vim/bundle/vim-rails"]
 	path = .vim/bundle/vim-rails
 	url = git://github.com/tpope/vim-rails.git
+[submodule ".vim/bundle/tslime"]
+	path = .vim/bundle/tslime
+	url = git@github.com:xaviershay/tslime.vim.git
