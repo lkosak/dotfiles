@@ -168,8 +168,6 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
 
-nmap <leader><tab> :NERDTreeToggle<CR>
-
 " --------------------------------------------------------
 " Ruby test runner
 " --------------------------------------------------------
