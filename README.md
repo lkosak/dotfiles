@@ -1,5 +1,5 @@
 # Dotfiles #
-A collection of mojo-preserving configurations. Makes a handsome environment.
+A collection of mojo-preserving configuration files. Makes a handsome environment.
 
 ### Some neat thing(s): ###
 
