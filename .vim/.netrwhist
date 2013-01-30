@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/lou/Sites/harbor/db/migrate'
 let g:netrw_dirhist_2='/Users/lou/Sites/ejabberd_harbor/src/ejabberd_thrift'
 let g:netrw_dirhist_3='/Users/lou/Sites/ejabberd_harbor/.git'
+let g:netrw_dirhist_4='/Users/lou/Sites/mod_autoconf'

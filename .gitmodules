@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/vim-repeat"]
 	path = .vim/bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
+[submodule ".rbenv"]
+	path = .rbenv
+	url = git://github.com/sstephenson/rbenv.git
