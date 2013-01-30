@@ -1,5 +1,5 @@
 " Try to use better color palettej
-set bg=light
+set bg=dark
 set t_Co=256
 colorscheme solarized
 
@@ -212,44 +212,56 @@ map <leader>c :w\|:!cucumber %<cr>
 map <leader>w :w\|:!script/acceptance --profile wip<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
+  let in_brunch_test_file = match(expand("%"), 'test\/.*_test\.\(coffee\|js\)$') != -1
+
+  if in_brunch_test_file
+    call RunBrunchTests()
+  else
     " Run the tests for the previously-marked file.
     let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+
     if in_test_file
-        call SetTestFile()
+      call SetTestFile()
     elseif !exists("t:grb_test_file")
-        return
+      return
     end
+
     call RunTests(t:grb_test_file . command_suffix)
+  end
+endfunction
+
+function! RunBrunchTests()
+  exec ":!brunch t"
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
 function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
 endfunction
 
 function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    :w
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    if match(a:filename, '\.feature$') != -1
-      exec ":!script/acceptance " . a:filename
-    else
-      exec ":!zeus rspec --color " . a:filename
-    end
+  " Write the file and run tests for the given filename
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  if match(a:filename, '\.feature$') != -1
+    exec ":!cucumber " . a:filename
+  else
+    exec ":!rspec --color " . a:filename
+  end
 endfunction

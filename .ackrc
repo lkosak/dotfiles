@@ -1,5 +1,6 @@
 --type-set=mustache=.mustache
---type-set=css=.css,.scss,.less
---type-set=html=.html,.haml,.hamlc
+--type-set=css=.css,.scss,.less,.styl
+--type-set=html=.html,.haml,.hamlc,.hbs
 --type-set=js=.js,.coffee
 --type-set=cucumber=.feature
+--ignore-dir=node_modules/
