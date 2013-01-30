@@ -1,10 +1,5 @@
-Dotfiles
-========
-A Lou Kosak production
---------
-
+# Dotfiles #
 A collection of mojo-preserving configurations. Makes a handsome environment.
-
 
 ### Some neat thing(s): ###
 
