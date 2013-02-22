@@ -51,7 +51,7 @@ set foldcolumn=0
 " Disables matchparen -- for performance reasons
 let loaded_matchparen = 1
 " Don't show character matches (maybe for performance reasons?)
-set noshowmatch 
+set noshowmatch
 
 " Friendlier search defaults
 set ignorecase
@@ -60,7 +60,7 @@ set incsearch
 set hlsearch
 nnoremap <leader><space> :noh<cr>
 
-" No idea what it does, or where it came from
+" Use tab to jump between opening and closing characters
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -101,7 +101,7 @@ autocmd BufNewFile,BufReadPre *.hamstache set filetype=haml
 " if has("autocmd")
 "   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 "     \| exe "normal g'\"" | endif
-" endif 
+" endif
 
 " --------------------------------------------------------
 " Splits!
@@ -167,6 +167,17 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
+
+
+" --------------------------------------------------------
+" little helper to clean up whitespace
+" --------------------------------------------------------
+function! CleanupWhitespace()
+  exec ":%s/ \\+$//ge"
+  exec ":%s/	/  /ge"
+endfunction
+
+nnoremap <leader><tab> :call CleanupWhitespace()<cr>
 
 " --------------------------------------------------------
 " Ruby test runner

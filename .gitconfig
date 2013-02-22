@@ -25,4 +25,4 @@
 [diff]
   tool = Kaleidoscope
 [heroku]
-	account = pinchit
+	account = personal
