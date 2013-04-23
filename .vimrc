@@ -1,7 +1,7 @@
 " Try to use better color palettej
 set t_Co=256
 colorscheme solarized
-set bg=light
+set bg=dark
 
 " Load pathogen
 filetype off

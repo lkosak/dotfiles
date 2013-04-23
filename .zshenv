@@ -1,3 +1,7 @@
+# Support for a .zlocal file that is outside of version control
+LOCALCONF="$HOME/.zlocal"
+[ -f $LOCALCONF ] && source $LOCALCONF
+
 # Pathypath
 export PATH="$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/local/Cellar/vim/7.3.333/bin:/Users/lkosak/pear/bin:$PATH:/usr/local/sbin"
 
@@ -6,3 +10,4 @@ eval "$(rbenv init -)"
 
 # Node the node
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+

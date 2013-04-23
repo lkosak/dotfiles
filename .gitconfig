@@ -1,11 +1,12 @@
 [user]
 	name = Lou Kosak
-	email = lkosak@gmail.com
+	email = lou.kosak@airbnb.com
 [core]
 	editor = /usr/bin/vim
 [color]
 	status = auto
 	diff = auto
+	ui = auto
 [alias]
   a = add
   s = status
