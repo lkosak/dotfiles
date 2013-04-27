@@ -37,16 +37,13 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set colorcolumn=80
+set colorcolumn=100
 
 " textmate style whitespace charts (show tabs and spaces)
 set list listchars=tab:▸\ ,trail:· "show trailing whitespace
 
 " Folding settings
-set foldmethod=syntax
-set foldnestmax=5
-set foldlevel=50
-set foldcolumn=0
+set nofoldenable
 
 " Disables matchparen -- for performance reasons
 let loaded_matchparen = 1
@@ -65,7 +62,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Share mac clipboard
-set clipboard+=unnamed
+set clipboard=unnamed
 
 " Ummm... probably from @dorkitude
 set selectmode=""

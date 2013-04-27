@@ -1,6 +1,6 @@
 [user]
 	name = Lou Kosak
-	email = lkosak@gmail.com
+	email = lou.kosak@airbnb.com
 [core]
 	editor = /usr/bin/vim
 [color]
@@ -15,8 +15,7 @@
   c = commit
   b = branch
   co = checkout
-  l = smart-log --all
-
+  l = log --graph --date=short
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset	
 [difftool "Kaleidoscope"]

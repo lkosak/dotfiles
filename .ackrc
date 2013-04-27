@@ -4,3 +4,8 @@
 --type-set=js=.js,.coffee
 --type-set=cucumber=.feature
 --ignore-dir=node_modules/
+--ignore-dir=log/
+--ignore-dir=tmp/
+--ignore-dir=app/assets/images/
+--ignore-dir=public/
+--ignore-dir=db/migrate/
