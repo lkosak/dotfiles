@@ -42,6 +42,9 @@ set colorcolumn=100
 " textmate style whitespace charts (show tabs and spaces)
 set list listchars=tab:▸\ ,trail:· "show trailing whitespace
 
+" disable ctags searching
+let g:Tlist_Ctags_Cmd = 'ctags'
+
 " Folding settings
 set nofoldenable
 
@@ -224,6 +227,6 @@ function! RunTestFile()
   elseif match(filename, '_spec\.js$') != -1
     exec ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
-    exec ":!rspec --color " . filename
+    exec ":!zeus rspec " . filename
   end
 endfunction

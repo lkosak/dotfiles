@@ -29,7 +29,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(gitfast)
 
 # Load that oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -58,6 +58,11 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
  chpwd
 }
 
+# only use local git files for autocompletion (speed tweak)
+__git_files () {
+  _wanted files expl 'local files' _files
+}
+
 # Fix forward delete
 bindkey "^[[3~" delete-char
 
@@ -70,7 +75,13 @@ alias ppdb_download="echo \"Downloading dump...\" && rsync -avzL --progress --sa
 alias ppdb_load="~/.dumps/load.sh"
 alias ppdb_sync="ppdb_capture && ppdb_download & ppdb_load"
 
-alias tmux="TERM=screen-256color-bce tmux"
+#alias tmux="TERM=screen-256color-bce tmux"
 alias z="zeus"
 alias zuke="zeus cucumber"
 alias v="vagrant"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Some things like editors. Some Lous like vim
+export EDITOR=vim
