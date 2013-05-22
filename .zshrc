@@ -85,3 +85,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # Some things like editors. Some Lous like vim
 export EDITOR=vim
+
+stty -ixon -ixoff

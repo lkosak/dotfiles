@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/lou/Sites/algo/quora'
-let g:netrw_dirhist_2='/Users/lou/Sites/englishverification/config/settings'
-let g:netrw_dirhist_3='/Users/lou/Sites/dotfiles/.git'
-let g:netrw_dirhist_4='/Users/lou/Sites'
-let g:netrw_dirhist_5='/Users/lou/Sites/airbnb/lib/payoneer'
-let g:netrw_dirhist_6='/Users/lou/Sites/gitmarklet/public'
-let g:netrw_dirhist_7='/Users/lou/Sites/airbnb/db/migrate'
-let g:netrw_dirhist_8='/Users/lou/Sites/airbnb/lib/payoneer'
-let g:netrw_dirhist_9='/Users/lou/Sites/airbnb/lib/payoneer_client'
+let g:netrw_dirhist_cnt =0
