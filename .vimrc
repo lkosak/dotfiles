@@ -24,20 +24,22 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
+set noerrorbells
 set ttyfast
 set ruler
-set backspace=indent,eol,start
 set laststatus=2
 set number
 set shell=/bin/sh " work with RVM I guess
+
+" More human backspace behavior
+set backspace=indent,eol,start whichwrap+=<,>,[,]
 
 " Default indentation settings
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set colorcolumn=100
+set colorcolumn=80
 
 " textmate style whitespace charts (show tabs and spaces)
 set list listchars=tab:▸\ ,trail:· "show trailing whitespace
@@ -65,11 +67,10 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Share mac clipboard
-set clipboard=unnamed
+set clipboard+=unnamed
 
 " Ummm... probably from @dorkitude
 set selectmode=""
-set backspace=indent,eol,start whichwrap+=<,>,[,]
 
 " Use a global backups dir to avoid backup file clutter
 set directory=~/.vim/backups
@@ -145,7 +146,7 @@ nmap <leader>ev :sp ~/.vimrc<cr>
 " Automatically reload vimrc on save
 augroup myvimrchooks
   au!
-  autocmd bufwritepost .vimrc source ~/.vimrc
+  autocmd bufwritepost .vimrc nested source ~/.vimrc
 augroup END
 
 " --------------------------------------------------------
@@ -153,7 +154,7 @@ augroup END
 " --------------------------------------------------------
 
 " Setup leader for Ack
-nnoremap <leader>a :Ack 
+nnoremap <leader>a :Ack<space>
 
 " Setup leader for Commant-T
 nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
@@ -227,6 +228,6 @@ function! RunTestFile()
   elseif match(filename, '_spec\.js$') != -1
     exec ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
-    exec ":!zeus rspec " . filename
+    exec ":!rspec " . filename
   end
 endfunction
