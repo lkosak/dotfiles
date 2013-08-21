@@ -1,7 +1,7 @@
-" Try to use better color palettej
+" Try to use better color palette
 set t_Co=256
-colorscheme solarized
 set bg=dark
+colorscheme solarized
 
 " Load pathogen
 filetype off
@@ -66,9 +66,6 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Share mac clipboard
-set clipboard+=unnamed
-
 " Ummm... probably from @dorkitude
 set selectmode=""
 
@@ -94,6 +91,7 @@ autocmd BufRead,BufReadPre ~/Sites/pinchit/application/views/* set filetype=html
 autocmd BufNewFile,BufReadPre *.sass set filetype=sass
 autocmd BufNewFile,BufReadPre *.hamlc set filetype=haml
 autocmd BufNewFile,BufReadPre *.hamstache set filetype=haml
+autocmd BufNewFile,BufReadPre *.erb set filetype=html
 
 " --------------------------------------------------------
 " Jump to last line edited when re-opening files
@@ -154,7 +152,7 @@ augroup END
 " --------------------------------------------------------
 
 " Setup leader for Ack
-nnoremap <leader>a :Ack<space>
+nnoremap <leader>a :Ag<space>
 
 " Setup leader for Commant-T
 nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
@@ -231,3 +229,18 @@ function! RunTestFile()
     exec ":!rspec " . filename
   end
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BLOCK EDITING HELPERS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! Inc(...)
+  let result = g:i
+  let g:i += a:0 > 0 ? a:1 : 1
+  return result
+endfunction
+
+function! Incr()
+  let g:i = 1
+  exec ":'<,'>s/@i/\\=Inc()/e"
+endfunction
+vnoremap <C-a> :call Incr()<CR>

@@ -15,7 +15,7 @@ ZSH_THEME="sorin"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
@@ -79,6 +79,9 @@ alias ppdb_sync="ppdb_capture && ppdb_download & ppdb_load"
 alias z="zeus"
 alias zuke="zeus cucumber"
 alias v="vagrant"
+
+#hub hub
+alias gpr='hub pull-request -b airbnb:master -h airbnb:$(git rev-parse --abbrev-ref HEAD)'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

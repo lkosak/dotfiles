@@ -16,6 +16,7 @@
   b = branch
   co = checkout
   l = log --graph --date=short
+  undo = reset --soft HEAD^
 [format]
   pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset	
 [difftool "Kaleidoscope"]

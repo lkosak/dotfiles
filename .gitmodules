@@ -37,3 +37,6 @@
 [submodule ".rbenv"]
 	path = .rbenv
 	url = git://github.com/sstephenson/rbenv.git
+[submodule ".vim/bundle/ag"]
+	path = .vim/bundle/ag
+	url = https://github.com/rking/ag.vim
