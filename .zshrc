@@ -46,6 +46,28 @@ SAVEHIST=1000000
 setopt append_history
 unsetopt share_history
 
+# Support for a .zlocal file that is outside of version control
+LOCALCONF="$HOME/.zlocal"
+[ -f $LOCALCONF ] && source $LOCALCONF
+
+# Pathypath
+export PATH="$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH:/usr/local/sbin"
+
+# Load rbenv
+eval "$(rbenv init -)"
+
+# Set Apple Terminal.app resume directory
+if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
+ function chpwd {
+   local SEARCH=' '
+   local REPLACE='%20'
+   local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
+   printf '\e]7;%s\a' $PWD_URL
+ }
+
+ chpwd
+}
+
 # only use local git files for autocompletion (speed tweak)
 __git_files () {
   _wanted files expl 'local files' _files
