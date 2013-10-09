@@ -8,17 +8,17 @@
 	diff = auto
 	ui = auto
 [alias]
-  a = add
   s = status
   d = diff
   dc = diff --cached
   c = commit
   b = branch
   co = checkout
-  l = log --graph --date=short
   undo = reset --soft HEAD^
+[log]
+  date=short
 [format]
-  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset	
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset	
 [difftool "Kaleidoscope"]
   cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -29,3 +29,5 @@
 	account = personal
 [push]
 	default = simple
+[rerere]
+  enabled = 1
