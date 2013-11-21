@@ -1,5 +1,7 @@
-" Try to use better color palette
+" Use a better color palette
 set t_Co=256
+
+" Set colorscheme
 set bg=dark
 colorscheme solarized
 
@@ -226,7 +228,7 @@ function! RunTestFile()
   elseif match(filename, '_spec\.js$') != -1
     exec ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
-    exec ":!rspec " . filename
+    exec ":!bundle exec rspec " . filename
   end
 endfunction
 
@@ -244,3 +246,9 @@ function! Incr()
   exec ":'<,'>s/@i/\\=Inc()/e"
 endfunction
 vnoremap <C-a> :call Incr()<CR>
+
+
+function! CopyHighlighted()
+  exec ":'<,'>w !highlight --syntax=rb -O rtf | pbcopy"
+endfunction
+vnoremap <leader>y :call CopyHighlighted()<CR>

@@ -46,18 +46,6 @@ SAVEHIST=1000000
 setopt append_history
 unsetopt share_history
 
-# Set Apple Terminal.app resume directory
-if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
- function chpwd {
-   local SEARCH=' '
-   local REPLACE='%20'
-   local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
-   printf '\e]7;%s\a' $PWD_URL
- }
-
- chpwd
-}
-
 # only use local git files for autocompletion (speed tweak)
 __git_files () {
   _wanted files expl 'local files' _files
@@ -69,24 +57,17 @@ bindkey "^[[3~" delete-char
 # disable flow control to allow <C-s> in vim
 stty -ixon -ixoff
 
-# DB syncage
-alias ppdb_capture="echo -n \"Creating dump on production server...\" && ssh pinchit.com '/home/lou/dump.sh' && echo \"done.\""
-alias ppdb_download="echo \"Downloading dump...\" && rsync -avzL --progress --safe-links -e 'ssh -p 9922' lou@pinchit.com:/home/lou/.dumps/pinchit-production-latest ~/.dumps/ && echo \"...done.\""
-alias ppdb_load="~/.dumps/load.sh"
-alias ppdb_sync="ppdb_capture && ppdb_download & ppdb_load"
-
-#alias tmux="TERM=screen-256color-bce tmux"
 alias z="zeus"
 alias zuke="zeus cucumber"
 alias v="vagrant"
 
-#hub hub
-alias gpr='hub pull-request -b airbnb:master -h airbnb:$(git rev-parse --abbrev-ref HEAD)'
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# color switching
+alias dark="perl -p -i -e 's/bg=light/bg=dark/g' ~/.vimrc"
+alias light="perl -p -i -e 's/bg=dark/bg=light/g' ~/.vimrc"
 
 # Some things like editors. Some Lous like vim
 export EDITOR=vim
 
-stty -ixon -ixoff
+# Support for a .zlocal file that is outside of version control
+LOCALCONF="$HOME/.zlocal"
+[ -f $LOCALCONF ] && source $LOCALCONF

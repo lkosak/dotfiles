@@ -1,8 +1,8 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/lou/Sites/drachma/spec/lib/recon/storage'
-let g:netrw_dirhist_2='/Users/lou/Sites/drachma/spec/support'
-let g:netrw_dirhist_3='/Users/lou/Sites/drachma/config'
-let g:netrw_dirhist_4='/Users/lou/Sites/drachma/lib/recon/transformers/bank_of_america'
-let g:netrw_dirhist_5='/Users/lou/Sites/drachma/spec/integration/reconcilers'
-let g:netrw_dirhist_6='/Users/lou/Sites/drachma/spec/integration/reconcilers/bank_of_america'
+let g:netrw_dirhist_1='/Users/lou/Sites/dotfiles/.rbenv/versions/1.9.3-p392-railsexpress/lib/ruby/gems/1.9.1/specifications'
+let g:netrw_dirhist_2='/Users/lou/Sites/drachma/config/initializers'
+let g:netrw_dirhist_3='/Users/lou/Sites/drachma/lib/drachma/transformers/western_union'
+let g:netrw_dirhist_4='/Users/lou/Sites/alexandria/db/migrate'
+let g:netrw_dirhist_5='/Users/lou/Sites/alexandria/app/models/vat'
+let g:netrw_dirhist_6='/Users/lou/.local'

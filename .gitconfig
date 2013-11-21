@@ -28,6 +28,6 @@
 [heroku]
 	account = personal
 [push]
-	default = simple
+	default = current
 [rerere]
   enabled = 1
