@@ -15,6 +15,8 @@
   b = branch
   co = checkout
   undo = reset --soft HEAD^
+  innit = ! sh -c 'open http://ultra.daney.es/'
+  latest = rev-parse --short HEAD
 [log]
   date=short
 [format]

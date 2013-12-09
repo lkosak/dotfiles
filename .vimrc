@@ -2,7 +2,7 @@
 set t_Co=256
 
 " Set colorscheme
-set bg=dark
+set bg=light
 colorscheme solarized
 
 " Load pathogen
@@ -219,8 +219,9 @@ nnoremap <leader>et :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
+map <leader>r :call RunTestFile("wip")<cr>
 
-function! RunTestFile()
+function! RunTestFile(...)
   let filename = expand("%")
 
   if match(filename, '\.feature$') != -1
@@ -228,7 +229,11 @@ function! RunTestFile()
   elseif match(filename, '_spec\.js$') != -1
     exec ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
-    exec ":!bundle exec rspec " . filename
+    if a:0 > 0
+      exec ":!bundle exec rspec --tag " . a:1 . " " . filename
+    else
+      exec ":!bundle exec rspec " . filename
+    endif
   end
 endfunction
 

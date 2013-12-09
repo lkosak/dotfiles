@@ -15,12 +15,16 @@ shopt -s dotglob
 
 FILES="$DIR/*"
 
-for f in $FILES 
+for f in $FILES
 do
  # Ignore this script
  FNAME=$(basename $f)
- if [ $FNAME != $MY_FNAME -a $FNAME != ".git" ]; then
-  echo "Linking $f to $HOME/$FNAME"
-  ln -s $f $HOME/$FNAME
+ if [ $FNAME != $MY_FNAME -a $FNAME != ".git" -a $FNAME != "README.md" ]; then
+  if [ -a $HOME/$FNAME ]; then
+    echo "$HOME/$FNAME already exists; skipping"
+  else
+    echo "Linking $f to $HOME/$FNAME"
+    ln -s $f $HOME/$FNAME
+  fi
  fi
 done
