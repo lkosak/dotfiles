@@ -2,7 +2,7 @@
 set t_Co=256
 
 " Set colorscheme
-set bg=light
+set bg=dark
 colorscheme solarized
 
 " Load pathogen
