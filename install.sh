@@ -29,7 +29,5 @@ do
      echo "Linking $f to $HOME/$FNAME"
      ln -s $f $HOME/$FNAME
    fi
-   echo "Linking $f to $HOME/$FNAME"
-   ln -s $f $HOME/$FNAME
  fi
 done
