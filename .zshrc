@@ -87,9 +87,26 @@ alias v="vagrant"
 alias dark="perl -p -i -e 's/bg=light/bg=dark/g' ~/.vimrc"
 alias light="perl -p -i -e 's/bg=dark/bg=light/g' ~/.vimrc"
 
+# sometimes tmux starts sending these focus/blur control sequences to the
+# terminal, which causes vim to go haywire when you focus/blur the pane.
+# sending this sequence to the terminal seems to fix it, so let's do this
+# instead of spending eighteen hours figuring out why it's happening.
+alias nofocus="echo -e \"\033[?1004lfixed\!\""
+
 # Some things like editors. Some Lous like vim
 export EDITOR=vim
 
 # Support for a .zlocal file that is outside of version control
 LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
+
+# via John Terenzio. support for reattach-to-user-namespace aliases for tmux.
+if [ "$TMUX" ]; then
+  # Use reattach-to-user-namespace for common commands if installed
+  if command -v reattach-to-user-namespace &> /dev/null; then
+    alias zsh='reattach-to-user-namespace zsh'
+    alias sudo='reattach-to-user-namespace sudo'
+    alias vim='reattach-to-user-namespace vim'
+    alias vi='reattach-to-user-namespace vim'
+  fi
+fi

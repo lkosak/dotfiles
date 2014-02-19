@@ -17,6 +17,7 @@
   undo = reset --soft HEAD^
   innit = ! sh -c 'open http://ultra.daney.es/'
   latest = rev-parse --short HEAD
+  rebuild = ! git push -f koality HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)
 [log]
   date=short
 [format]
