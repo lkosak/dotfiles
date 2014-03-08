@@ -1,2 +1,3 @@
 .vim/backups/*
 .vim/.netrwhist
+.vim/tmp/ctrlp/mru/cache.txt
