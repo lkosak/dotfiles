@@ -1,0 +1,4 @@
+#!/bin/sh
+if command -v pmset &> /dev/null; then
+  echo "[$(pmset -g batt | egrep -o '[0-9]+\%')]"
+fi
