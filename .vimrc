@@ -182,23 +182,18 @@ endfunction
 
 nnoremap <leader><tab> :call CleanupWhitespace()<cr>
 
-
 " --------------------------------------------------------
-" setup ctrl-p
+" command-t
 " --------------------------------------------------------
+nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-" Credit: https://github.com/thoughtbot/dotfiles/blob/master/vimrc
-
-nnoremap <leader>f :CtrlP<CR>
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:100'
-
-let g:ctrlp_cache_dir = $HOME.'/.vim/tmp/ctrlp'
-let g:ctrlp_lazy_update = 50
-let g:ctrlp_user_command = 'find %s -type f | egrep -iv "(\.(eot|gif|gz|ico|jpg|jpeg|otf|png|psd|pyc|svg|ttf|woff|zip)$)|(/\.)|((^|\/)tmp\/)"'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_use_caching = 0
+" Fix esc and cursor key navigation in command-t
+set ttimeoutlen=50
+if &term =~ "xterm" || &term =~ "screen"
+  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+endif
 
 " --------------------------------------------------------
 " Ruby test runner
