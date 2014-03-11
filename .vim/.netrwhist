@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/lou/Sites/dotfiles/.rbenv/versions/1.9.3-p392-railsexpress/lib/ruby/gems/1.9.1/gems/tddium-1.18.1/lib/tddium'
 let g:netrw_dirhist_2='/Users/lou/Sites/airbnb/db/migrate'
 let g:netrw_dirhist_3='/Users/lou/Sites/pinnacle/db/migrate'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/lou/Sites/airbnb/db/migrate'
 let g:netrw_dirhist_5='/Users/lou/Sites/airbnb/lib/stamps_dot_com'
 let g:netrw_dirhist_6='/Users/lou/Sites/airbnb/spec/models/core/reservation2'
 let g:netrw_dirhist_7='/Users/lou/Sites/airbnb/db/migrate'
+let g:netrw_dirhist_8='/Users/lou/.tmux'
