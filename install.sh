@@ -23,7 +23,9 @@ do
  FNAME=$(basename $f)
 
  if [[ ! ${exclusions[@]} =~ "$FNAME" ]]; then
-   if [ -a $HOME/$FNAME ]; then
+   if [ -h $HOME/$FNAME ]; then
+     echo "$HOME/$FNAME already linked; skipping"
+   elif [ -e $HOME/$FNAME ]; then
      echo "$HOME/$FNAME already exists; skipping"
    else
      echo "Linking $f to $HOME/$FNAME"

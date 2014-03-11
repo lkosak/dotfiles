@@ -1,6 +1,3 @@
-" Use a better color palette
-set t_Co=256
-
 " Set colorscheme
 set bg=dark
 colorscheme solarized
@@ -43,6 +40,9 @@ set softtabstop=2
 set expandtab
 set colorcolumn=80
 
+" use system clipboard
+set clipboard=unnamed
+
 " textmate style whitespace charts (show tabs and spaces)
 set list listchars=tab:▸\ ,trail:· "show trailing whitespace
 
@@ -79,21 +79,31 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" Solarized bg flipper
-" call togglebg#map("<F5>")
+" color time!
+highlight Search ctermbg=0
+highlight SpecialKey ctermfg=8 ctermbg=none
+highlight StatusLine cterm=none
+highlight StatusLineNC cterm=none
+highlight VertSplit ctermfg=8 ctermbg=8
+highlight Visual ctermbg=0
+highlight WarningMsg ctermfg=3 cterm=none
 
 " --------------------------------------------------------
 " Filetype stuff
 " --------------------------------------------------------
 
-" set automatic filetype for *.rabl
 autocmd BufNewFile,BufReadPre *.rabl set filetype=ruby
-" set automatic filetype for views
-autocmd BufRead,BufReadPre ~/Sites/pinchit/application/views/* set filetype=html
 autocmd BufNewFile,BufReadPre *.sass set filetype=sass
 autocmd BufNewFile,BufReadPre *.hamlc set filetype=haml
 autocmd BufNewFile,BufReadPre *.hamstache set filetype=haml
 autocmd BufNewFile,BufReadPre *.erb set filetype=html
+autocmd BufNewFile,BufReadPre *.md set filetype=markdown
+
+" Ruby files without extensions
+autocmd BufNewFile,BufRead Gemfile     setfiletype ruby
+autocmd BufNewFile,BufRead Isolate     setfiletype ruby
+autocmd BufNewFile,BufRead Vagrantfile setfiletype ruby
+autocmd BufNewFile,BufRead config.ru   setfiletype ruby
 
 " --------------------------------------------------------
 " Jump to last line edited when re-opening files
@@ -156,19 +166,10 @@ augroup END
 " Setup leader for Ack
 nnoremap <leader>a :Ag<space>
 
-" Setup leader for Commant-T
-nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-
 set wildignore=node_modules/**
 
-" Fix esc and cursor key navigation in command-t
-set ttimeoutlen=50
-if &term =~ "xterm" || &term =~ "screen"
-  let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-  let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-  let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-endif
-
+let g:airline_left_sep='' " Hide silly Airline carot
+set ttimeoutlen=50 " Fix delay issue with mode display in Airline
 
 " --------------------------------------------------------
 " little helper to clean up whitespace
@@ -180,6 +181,24 @@ function! CleanupWhitespace()
 endfunction
 
 nnoremap <leader><tab> :call CleanupWhitespace()<cr>
+
+
+" --------------------------------------------------------
+" setup ctrl-p
+" --------------------------------------------------------
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+" Credit: https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+
+nnoremap <leader>f :CtrlP<CR>
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:10,results:100'
+
+let g:ctrlp_cache_dir = $HOME.'/.vim/tmp/ctrlp'
+let g:ctrlp_lazy_update = 50
+let g:ctrlp_user_command = 'find %s -type f | egrep -iv "(\.(eot|gif|gz|ico|jpg|jpeg|otf|png|psd|pyc|svg|ttf|woff|zip)$)|(/\.)|((^|\/)tmp\/)"'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_use_caching = 0
 
 " --------------------------------------------------------
 " Ruby test runner
@@ -251,9 +270,3 @@ function! Incr()
   exec ":'<,'>s/@i/\\=Inc()/e"
 endfunction
 vnoremap <C-a> :call Incr()<CR>
-
-
-function! CopyHighlighted()
-  exec ":'<,'>w !highlight --syntax=rb -O rtf | pbcopy"
-endfunction
-vnoremap <leader>y :call CopyHighlighted()<CR>
