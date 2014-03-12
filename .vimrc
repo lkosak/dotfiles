@@ -185,7 +185,8 @@ nnoremap <leader><tab> :call CleanupWhitespace()<cr>
 " --------------------------------------------------------
 " command-t
 " --------------------------------------------------------
-nmap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+nmap <leader>rf :CommandTFlush<cr>\|:CommandT<cr>
+nmap <leader>f :CommandT<cr>
 
 " Fix esc and cursor key navigation in command-t
 set ttimeoutlen=50
@@ -194,6 +195,9 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
+
+" monorail has a ton of files
+let g:CommandTMaxFiles=30000
 
 " --------------------------------------------------------
 " Ruby test runner
