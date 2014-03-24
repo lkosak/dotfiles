@@ -239,8 +239,18 @@ nnoremap <leader>et :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>r :call RunTestFile("wip")<cr>
 
+function! ZeusRunning()
+  return findfile(".zeus.sock", getcwd()) == ".zeus.sock"
+endfunction
+
 function! RunTestFile(...)
   let filename = expand("%")
+
+  if ZeusRunning()
+    let command = "zeus rspec"
+  else
+    let command = "bundle exec rspec"
+  end
 
   if match(filename, '\.feature$') != -1
     exec ":!cucumber " . filename
@@ -248,9 +258,9 @@ function! RunTestFile(...)
     exec ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
     if a:0 > 0
-      exec ":!bundle exec rspec --tag " . a:1 . " " . filename
+      exec ":!" . command . " --tag " . a:1 . " " . filename
     else
-      exec ":!bundle exec rspec " . filename
+      exec ":!" . command . " " . filename
     endif
   end
 endfunction
