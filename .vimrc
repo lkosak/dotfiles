@@ -38,7 +38,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set colorcolumn=80
+set colorcolumn=80,100
 
 " use system clipboard
 set clipboard=unnamed
@@ -236,14 +236,15 @@ nnoremap <leader>et :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :call RunTestFile()<cr>
-map <leader>r :call RunTestFile("wip")<cr>
+map <leader>r :call RunTestFile("")<cr>
+"map <leader>r :call RunTestFile("", "--tag wip")<cr>
+map <leader>t :call RunTestFile(line("."))<cr>
 
 function! ZeusRunning()
   return findfile(".zeus.sock", getcwd()) == ".zeus.sock"
 endfunction
 
-function! RunTestFile(...)
+function! RunTestFile(line, ...)
   let filename = expand("%")
 
   if ZeusRunning()
@@ -252,17 +253,29 @@ function! RunTestFile(...)
     let command = "bundle exec rspec"
   end
 
+  let run = ""
+
   if match(filename, '\.feature$') != -1
-    exec ":!cucumber " . filename
+    let run = ":!cucumber " . filename
   elseif match(filename, '_spec\.js$') != -1
-    exec ":!make test"
+    let run = ":!make test"
   elseif match(filename, '_spec\.rb$') != -1
+    if a:line
+      let filename = filename . ":" . a:line
+    endif
+
     if a:0 > 0
-      exec ":!" . command . " --tag " . a:1 . " " . filename
+      let run = ":!" . command . " " . a:1  . " " . filename
     else
-      exec ":!" . command . " " . filename
+      let run = ":!" . command . " " . filename
     endif
   end
+
+  if empty(run)
+    echo "Not in a test file"
+  else
+    exec run
+  endif
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
