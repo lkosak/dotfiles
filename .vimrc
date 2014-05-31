@@ -197,7 +197,7 @@ if &term =~ "xterm" || &term =~ "screen"
 endif
 
 " monorail has a ton of files
-let g:CommandTMaxFiles=30000
+let g:CommandTWildIgnore="app/assets/images/**,tmp/**,public/**,node_modules/**,vendor/plugins/**"
 
 " --------------------------------------------------------
 " Ruby test runner
