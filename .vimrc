@@ -1,5 +1,5 @@
 " Set colorscheme
-set bg=light
+set bg=dark
 colorscheme solarized
 
 " Load pathogen
