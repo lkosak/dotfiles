@@ -18,6 +18,7 @@
   innit = ! sh -c 'open http://ultra.daney.es/'
   latest = rev-parse --short HEAD
   rebuild = ! git push -f koality HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)
+  prune-merged = ! "git branch --merged master | grep -v -E '^(\\* |  master$)' | xargs -n 1 git branch -d"
 [log]
   date=short
 [format]

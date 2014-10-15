@@ -170,6 +170,7 @@ set wildignore=node_modules/**
 
 let g:airline_left_sep='' " Hide silly Airline carot
 set ttimeoutlen=50 " Fix delay issue with mode display in Airline
+let g:fugitive_github_domains = ['github.com', 'git.airbnb.com'] " GHE support for fugitive
 
 " --------------------------------------------------------
 " little helper to clean up whitespace
