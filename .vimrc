@@ -1,6 +1,11 @@
 " Set colorscheme
 set bg=dark
-colorscheme solarized
+
+try
+  colorscheme solarized
+catch /^Vim\%((\a\+)\)\=:E185/
+  " no-op
+endtry
 
 " Load pathogen
 filetype off
@@ -80,13 +85,13 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 " color time!
-highlight Search ctermbg=0
-highlight SpecialKey ctermfg=8 ctermbg=none
-highlight StatusLine cterm=none
-highlight StatusLineNC cterm=none
-highlight VertSplit ctermfg=8 ctermbg=8
-highlight Visual ctermbg=0
-highlight WarningMsg ctermfg=3 cterm=none
+" highlight Search ctermbg=0
+" highlight SpecialKey ctermfg=8 ctermbg=none
+" highlight StatusLine cterm=none
+" highlight StatusLineNC cterm=none
+" highlight VertSplit ctermfg=8 ctermbg=8
+" highlight Visual ctermbg=0
+" highlight WarningMsg ctermfg=3 cterm=none
 
 " --------------------------------------------------------
 " Filetype stuff
@@ -113,6 +118,11 @@ autocmd BufNewFile,BufRead config.ru   setfiletype ruby
 "   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 "     \| exe "normal g'\"" | endif
 " endif
+
+" --------------------------------------------------------
+" trim trailing whitespace on save
+" --------------------------------------------------------
+autocmd BufWritePre *.rb :%s/\s\+$//e " Ruby
 
 " --------------------------------------------------------
 " Splits!
@@ -189,6 +199,8 @@ nnoremap <leader><tab> :call CleanupWhitespace()<cr>
 nmap <leader>rf :CommandTFlush<cr>\|:CommandT<cr>
 nmap <leader>f :CommandT<cr>
 
+let g:CommandTMaxFiles=100000
+
 " Fix esc and cursor key navigation in command-t
 set ttimeoutlen=50
 if &term =~ "xterm" || &term =~ "screen"
@@ -199,6 +211,11 @@ endif
 
 " monorail has a ton of files
 let g:CommandTWildIgnore="app/assets/images/**,tmp/**,public/**,node_modules/**,vendor/plugins/**"
+
+" --------------------------------------------------------
+" Ruby helpers
+" --------------------------------------------------------
+nnoremap <leader>d :!ag "^ +?def" %<cr>
 
 " --------------------------------------------------------
 " Ruby test runner
