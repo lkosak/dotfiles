@@ -84,14 +84,13 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" color time!
-" highlight Search ctermbg=0
-" highlight SpecialKey ctermfg=8 ctermbg=none
-" highlight StatusLine cterm=none
-" highlight StatusLineNC cterm=none
-" highlight VertSplit ctermfg=8 ctermbg=8
-" highlight Visual ctermbg=0
-" highlight WarningMsg ctermfg=3 cterm=none
+" color time! (via JT)
+highlight Search ctermbg=0
+highlight StatusLine cterm=none
+highlight StatusLineNC cterm=none
+highlight VertSplit ctermfg=8 ctermbg=8
+highlight Visual ctermbg=0
+highlight WarningMsg ctermfg=3 cterm=none
 
 " --------------------------------------------------------
 " Filetype stuff
