@@ -25,8 +25,17 @@ do
  if [[ ! ${exclusions[@]} =~ "$FNAME" ]]; then
    if [ -h $HOME/$FNAME ]; then
      echo "$HOME/$FNAME already linked; skipping"
-   elif [ -e $HOME/$FNAME ]; then
+   elif [ -d $HOME/$FNAME ]; then
      echo "$HOME/$FNAME already exists; skipping"
+   elif [ -e $HOME/$FNAME ]; then
+     diff $HOME/$FNAME $f > /dev/null
+
+     if [ $? -eq 0 ]; then
+       echo "$HOME/$FNAME exists but identical; replacing with link"
+       ln -sf $f $HOME/$FNAME
+     else
+       echo "$HOME/$FNAME already exists; skipping"
+     fi
    else
      echo "Linking $f to $HOME/$FNAME"
      ln -s $f $HOME/$FNAME
