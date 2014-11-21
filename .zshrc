@@ -51,7 +51,7 @@ LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
 
 # Pathypath
-export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin/:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin/:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/share/python"
 
 # Load rbenv
 eval "$(rbenv init -)"
@@ -110,3 +110,6 @@ if [ "$TMUX" ]; then
     alias vi='reattach-to-user-namespace vim'
   fi
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

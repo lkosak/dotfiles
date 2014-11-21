@@ -19,6 +19,7 @@
   latest = rev-parse --short HEAD
   rebuild = ! git push -f koality HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)
   prune-merged = ! "git branch --merged master | grep -v -E '^(\\* |  master$)' | xargs -n 1 git branch -d"
+  plog = log --graph --abbrev-commit --pretty=oneline
 [log]
   date=short
 [format]
