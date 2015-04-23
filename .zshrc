@@ -51,7 +51,7 @@ LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
 
 # Pathypath
-export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin/:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/share/python"
+export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 # Load rbenv
 eval "$(rbenv init -)"
