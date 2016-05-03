@@ -3,6 +3,8 @@
 	email = lou.kosak@airbnb.com
 [core]
 	editor = /usr/bin/vim
+	precomposeunicode = true
+	excludesfile = /Users/lou/.gitignore_global
 [color]
 	status = auto
 	diff = auto
@@ -35,4 +37,4 @@
 [push]
 	default = current
 [rerere]
-  enabled = 1
+	enabled = 1

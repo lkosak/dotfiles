@@ -46,10 +46,6 @@ SAVEHIST=1000000
 setopt append_history
 unsetopt share_history
 
-# Support for a .zlocal file that is outside of version control
-LOCALCONF="$HOME/.zlocal"
-[ -f $LOCALCONF ] && source $LOCALCONF
-
 # Pathypath
 export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
