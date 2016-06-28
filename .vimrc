@@ -119,11 +119,6 @@ autocmd BufNewFile,BufRead config.ru   setfiletype ruby
 " endif
 
 " --------------------------------------------------------
-" trim trailing whitespace on save
-" --------------------------------------------------------
-autocmd BufWritePre *.rb :%s/\s\+$//e " Ruby
-
-" --------------------------------------------------------
 " Splits!
 " --------------------------------------------------------
 
@@ -179,7 +174,7 @@ set wildignore=node_modules/**
 
 let g:airline_left_sep='' " Hide silly Airline carot
 set ttimeoutlen=50 " Fix delay issue with mode display in Airline
-let g:fugitive_github_domains = ['github.com', 'git.airbnb.com'] " GHE support for fugitive
+let g:fugitive_github_domains = ['github.com', 'git.musta.ch'] " GHE support for fugitive
 
 " --------------------------------------------------------
 " little helper to clean up whitespace
@@ -208,8 +203,14 @@ if &term =~ "xterm" || &term =~ "screen"
   let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 endif
 
+let g:CommandTMatchWindowReverse = 0
+
 " monorail has a ton of files
 let g:CommandTWildIgnore="app/assets/images/**,tmp/**,public/**,node_modules/**,vendor/plugins/**"
+
+" use the pwd as root -- don't look for SCM root (allows for proper usage
+" in gem paths)
+let g:CommandTTraverseSCM = 'pwd'
 
 " --------------------------------------------------------
 " Ruby helpers
