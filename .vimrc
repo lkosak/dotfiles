@@ -210,6 +210,8 @@ let g:CommandTWildIgnore="app/assets/images/**,tmp/**,public/**,node_modules/**,
 " in gem paths)
 let g:CommandTTraverseSCM = 'pwd'
 
+" use `git ls-files` for scanning. decent performance since 'find' has issues
+" w/ monorail
 let g:CommandTFileScanner = 'git'
 
 " --------------------------------------------------------
