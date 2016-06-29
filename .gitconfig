@@ -1,14 +1,14 @@
 [user]
-	name = Lou Kosak
-	email = lou.kosak@airbnb.com
+  name = Lou Kosak
+  email = lou.kosak@airbnb.com
 [core]
-	editor = /usr/bin/vim
-	precomposeunicode = true
-	excludesfile = /Users/lou/.gitignore_global
+  editor = /usr/bin/vim
+  precomposeunicode = true
+  excludesfile = /Users/lou/.gitignore_global
 [color]
-	status = auto
-	diff = auto
-	ui = auto
+  status = auto
+  diff = auto
+  ui = auto
 [alias]
   s = status
   d = diff
@@ -25,7 +25,7 @@
 [log]
   date=short
 [format]
-  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset	
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset
 [difftool "Kaleidoscope"]
   cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -33,8 +33,8 @@
 [diff]
   tool = Kaleidoscope
 [heroku]
-	account = personal
+  account = personal
 [push]
-	default = current
+  default = current
 [rerere]
-	enabled = 1
+  enabled = 1
