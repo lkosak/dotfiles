@@ -170,8 +170,6 @@ augroup END
 " Setup leader for Ack
 nnoremap <leader>a :Ag<space>
 
-set wildignore=node_modules/**
-
 let g:airline_left_sep='' " Hide silly Airline carot
 set ttimeoutlen=50 " Fix delay issue with mode display in Airline
 let g:fugitive_github_domains = ['github.com', 'git.musta.ch'] " GHE support for fugitive
@@ -211,6 +209,8 @@ let g:CommandTWildIgnore="app/assets/images/**,tmp/**,public/**,node_modules/**,
 " use the pwd as root -- don't look for SCM root (allows for proper usage
 " in gem paths)
 let g:CommandTTraverseSCM = 'pwd'
+
+let g:CommandTFileScanner = 'git'
 
 " --------------------------------------------------------
 " Ruby helpers
