@@ -96,12 +96,13 @@ highlight WarningMsg ctermfg=3 cterm=none
 " Filetype stuff
 " --------------------------------------------------------
 
-autocmd BufNewFile,BufReadPre *.rabl set filetype=ruby
-autocmd BufNewFile,BufReadPre *.sass set filetype=sass
-autocmd BufNewFile,BufReadPre *.hamlc set filetype=haml
-autocmd BufNewFile,BufReadPre *.hamstache set filetype=haml
-autocmd BufNewFile,BufReadPre *.erb set filetype=html
-autocmd BufNewFile,BufReadPre *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.thor set filetype=ruby
+autocmd BufNewFile,BufRead *.rabl set filetype=ruby
+autocmd BufNewFile,BufRead *.sass set filetype=sass
+autocmd BufNewFile,BufRead *.hamlc set filetype=haml
+autocmd BufNewFile,BufRead *.hamstache set filetype=haml
+autocmd BufNewFile,BufRead *.erb set filetype=html
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " Ruby files without extensions
 autocmd BufNewFile,BufRead Gemfile     setfiletype ruby
