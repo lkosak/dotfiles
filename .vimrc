@@ -97,6 +97,7 @@ highlight WarningMsg ctermfg=3 cterm=none
 " --------------------------------------------------------
 
 autocmd BufNewFile,BufRead *.thor set filetype=ruby
+autocmd BufNewFile,BufRead *.tt set filetype=ruby
 autocmd BufNewFile,BufRead *.rabl set filetype=ruby
 autocmd BufNewFile,BufRead *.sass set filetype=sass
 autocmd BufNewFile,BufRead *.hamlc set filetype=haml
