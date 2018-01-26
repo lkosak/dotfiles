@@ -174,7 +174,7 @@ nnoremap <leader>a :Ag<space>
 
 let g:airline_left_sep='' " Hide silly Airline carot
 set ttimeoutlen=50 " Fix delay issue with mode display in Airline
-let g:fugitive_github_domains = ['github.com', 'git.musta.ch'] " GHE support for fugitive
+let g:github_enterprise_urls = ['https://git.musta.ch'] " GHE support for fugitive
 
 " --------------------------------------------------------
 " little helper to clean up whitespace
