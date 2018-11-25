@@ -15,7 +15,7 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh solarized)
 
 for f in $FILES
 do
