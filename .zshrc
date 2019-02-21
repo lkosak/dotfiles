@@ -96,17 +96,6 @@ export EDITOR=vim
 LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
 
-# via John Terenzio. support for reattach-to-user-namespace aliases for tmux.
-if [ "$TMUX" ]; then
-  # Use reattach-to-user-namespace for common commands if installed
-  if command -v reattach-to-user-namespace &> /dev/null; then
-    alias zsh='reattach-to-user-namespace zsh'
-    alias sudo='reattach-to-user-namespace sudo'
-    alias vim='reattach-to-user-namespace vim'
-    alias vi='reattach-to-user-namespace vim'
-  fi
-fi
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
