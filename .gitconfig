@@ -39,3 +39,5 @@
 	default = current
 [rerere]
 	enabled = true
+[pager]
+	branch = false
