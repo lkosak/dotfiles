@@ -1,5 +1,5 @@
 " Set colorscheme
-set bg=dark
+set bg=light
 
 try
   colorscheme solarized
@@ -221,87 +221,8 @@ let g:CommandTFileScanner = 'git'
 " --------------------------------------------------------
 nnoremap <leader>d :!ag "^ +?def" %<cr>
 
-" --------------------------------------------------------
-" Ruby test runner
-" --------------------------------------------------------
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SWITCH BETWEEN TEST AND PRODUCTION CODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<exhibits\>') != -1 || match(current_file, '\<services\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
-  else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
-  endif
-  return new_file
-endfunction
-nnoremap <leader>et :call OpenTestAlternate()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>r :call RunTestFile("")<cr>
-"map <leader>r :call RunTestFile("", "--tag wip")<cr>
-map <leader>t :call RunTestFile(line("."))<cr>
-
-function! ZeusRunning()
-  return findfile(".zeus.sock", getcwd()) == ".zeus.sock"
-endfunction
-
-function! RunTestFile(line, ...)
-  let filename = expand("%")
-
-  if ZeusRunning()
-    let command = "zeus rspec"
-  else
-    let command = "bundle exec rspec"
-  end
-
-  let run = ""
-
-  if match(filename, '\.feature$') != -1
-    let run = ":!cucumber " . filename
-  elseif match(filename, '_spec\.js$') != -1
-    let run = ":!make test"
-  elseif match(filename, '_spec\.rb$') != -1
-    if a:line
-      let filename = filename . ":" . a:line
-    endif
-
-    if a:0 > 0
-      let run = ":!" . command . " " . a:1  . " " . filename
-    else
-      let run = ":!" . command . " " . filename
-    endif
-  end
-
-  if empty(run)
-    echo "Not in a test file"
-  else
-    exec run
-  endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BLOCK EDITING HELPERS
+" Block editing helpers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! Inc(...)
   let result = g:i
@@ -314,3 +235,11 @@ function! Incr()
   exec ":'<,'>s/@i/\\=Inc()/e"
 endfunction
 vnoremap <C-a> :call Incr()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GoLang setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
+autocmd FileType go set tabstop=4|set shiftwidth=4|set expandtab|set nolist
