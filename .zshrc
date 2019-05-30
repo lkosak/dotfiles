@@ -75,10 +75,6 @@ bindkey "^[[3~" delete-char
 # disable flow control to allow <C-s> in vim
 stty -ixon -ixoff
 
-alias z="zeus"
-alias zuke="zeus cucumber"
-alias v="vagrant"
-
 # color switching
 alias dark="perl -p -i -e 's/bg=light/bg=dark/g' ~/.vimrc"
 alias light="perl -p -i -e 's/bg=dark/bg=light/g' ~/.vimrc"
@@ -95,9 +91,6 @@ export EDITOR=vim
 # Support for a .zlocal file that is outside of version control
 LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
 
 # Performance hack for slow repos
 function git_prompt_info() {
