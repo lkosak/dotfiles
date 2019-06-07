@@ -15,7 +15,11 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh solarized)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code)
+
+VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
+mkdir -p "$VS_CODE_ROOT"
+ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
 
 for f in $FILES
 do

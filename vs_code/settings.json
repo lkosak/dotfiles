@@ -1,0 +1,22 @@
+{
+  "editor.detectIndentation": true,
+  "editor.tabSize": 2,
+  "workbench.editor.highlightModifiedTabs": true,
+  "editor.cursorStyle": "block",
+  "editor.cursorBlinking": "smooth",  
+  "go.useLanguageServer": true,
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true // for build and vet errors as you type
+  },
+  "[go]": {
+    "editor.snippetSuggestions": "none",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
+  },
+  "gopls": {
+    "usePlaceholders": true // add parameter placeholders when completing a function
+  },
+  "files.eol": "\n", // formatting only supports LF line endings
+}
