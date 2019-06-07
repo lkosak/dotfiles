@@ -1,11 +1,11 @@
 [user]
-  name = Lou Kosak
-  email = lou.kosak@airbnb.com
+  name = Louis Kosak
+  email = lkosak@plaid.com
 [core]
   editor = /usr/bin/vim
-	precomposeunicode = true
-  excludesfile = /Users/lou/.gitignore_global
-	sparseCheckout = true
+  precomposeunicode = true
+  excludesfile = /Users/lkosak/.gitignore_global
+  sparseCheckout = true
 [color]
   status = auto
   diff = auto
@@ -36,8 +36,10 @@
 [heroku]
   account = personal
 [push]
-	default = current
+  default = current
 [rerere]
-	enabled = true
+  enabled = true
 [pager]
-	branch = false
+  branch = false
+[url "git@github.plaid.com:"]
+  insteadOf = https://github.plaid.com/
