@@ -4,7 +4,7 @@
 [core]
   editor = /usr/bin/vim
   precomposeunicode = true
-  excludesfile = /Users/lkosak/.gitignore_global
+	excludesfile = /Users/lkosak/.gitignore_global
   sparseCheckout = true
 [color]
   status = auto

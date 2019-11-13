@@ -1,22 +1,48 @@
 {
   "editor.detectIndentation": true,
   "editor.tabSize": 2,
+  "editor.rulers": [
+    79,
+  ],
+  "editor.acceptSuggestionOnCommitCharacter": false,
+
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "terminal.integrated.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontSize": 12,
+  "window.title": "${activeEditorLong}${separator}${rootName}",
+
   "workbench.editor.highlightModifiedTabs": true,
-  "editor.cursorStyle": "block",
-  "editor.cursorBlinking": "smooth",  
+
+  "clock.dateFormat": "HH:MM",
+
+  // Plaid-specific monorepo settings
+  "go.testFlags": ["-v", "-count", "1"],
+  "go.testEnvFile": "${workspaceFolder}/environment/experimental",
+
+  // Trying this out
+  "go.autocompleteUnimportedPackages": true,
+
+  // gopls settings
   "go.useLanguageServer": true,
-  "go.languageServerExperimentalFeatures": {
-    "diagnostics": true // for build and vet errors as you type
-  },
   "[go]": {
     "editor.snippetSuggestions": "none",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
-    }
+    },
+    "editor.codeActionsOnSaveTimeout": 3000,
   },
   "gopls": {
     "usePlaceholders": true // add parameter placeholders when completing a function
   },
-  "files.eol": "\n", // formatting only supports LF line endings
+
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.minimap.enabled": true,
+  "tslint.configFile": "/Users/lkosak/plaid/pdaas/node_modules/plaid-dev-tools/tslint.json",
+  "terminal.external.linuxExec": "xterm-256color",
+  "terminal.external.osxExec": "iTerm.app",
+  "window.zoomLevel": 0,
 }
