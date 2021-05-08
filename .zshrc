@@ -47,22 +47,10 @@ setopt append_history
 unsetopt share_history
 
 # Pathypath
-export PATH="$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="/opt/homebrew/bin:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 # Load rbenv
 eval "$(rbenv init -)"
-
-# Set Apple Terminal.app resume directory
-if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
- function chpwd {
-   local SEARCH=' '
-   local REPLACE='%20'
-   local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
-   printf '\e]7;%s\a' $PWD_URL
- }
-
- chpwd
-}
 
 # only use local git files for autocompletion (speed tweak)
 __git_files () {
@@ -74,16 +62,6 @@ bindkey "^[[3~" delete-char
 
 # disable flow control to allow <C-s> in vim
 stty -ixon -ixoff
-
-# color switching
-alias dark="perl -p -i -e 's/bg=light/bg=dark/g' ~/.vimrc"
-alias light="perl -p -i -e 's/bg=dark/bg=light/g' ~/.vimrc"
-
-# sometimes tmux starts sending these focus/blur control sequences to the
-# terminal, which causes vim to go haywire when you focus/blur the pane.
-# sending this sequence to the terminal seems to fix it, so let's do this
-# instead of spending eighteen hours figuring out why it's happening.
-alias nofocus="echo -e \"\033[?1004lfixed\!\""
 
 # Some things like editors. Some Lous like vim
 export EDITOR=vim
@@ -97,3 +75,6 @@ function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
+
+# Force rbenv to use homebrew's OpenSSL
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
