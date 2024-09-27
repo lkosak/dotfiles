@@ -15,7 +15,7 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code com.googlecode.iterm2.plist)
 
 VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VS_CODE_ROOT"
@@ -48,5 +48,5 @@ do
 done
 
 
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Sites/dotfiles/iterm2"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Sites/dotfiles"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
