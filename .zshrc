@@ -50,7 +50,9 @@ unsetopt share_history
 export PATH="/opt/homebrew/bin:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 # Load rbenv
-eval "$(rbenv init -)"
+if command -v rbenv > /dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
 # only use local git files for autocompletion (speed tweak)
 __git_files () {
