@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Lou's Google Meet Monkeypatches!
+// @name         Lou's Google Meet Monkeypatches
 // @namespace    http://www.lou.co
-// @version      2024-10-28
+// @version      2024-10-29
 // @description  Yeahhhh
 // @author       You
 // @match        https://meet.google.com/*
