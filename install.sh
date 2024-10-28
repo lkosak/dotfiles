@@ -15,7 +15,7 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .config .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code com.googlecode.iterm2.plist)
+exclusions=($MY_FNAME .config .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code com.googlecode.iterm2.plist tampermonkey)
 
 VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VS_CODE_ROOT"
