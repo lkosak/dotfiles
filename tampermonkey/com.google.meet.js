@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Lou's Google Meet Monkeypatches
+// @name         Lou's Marvelous Google Meet Monkeypatches
 // @namespace    http://www.lou.co
 // @version      2024-10-28
 // @description  Yeahhhh
@@ -14,6 +14,10 @@
     const TOOLTIP_TEXT = "You are still sending your video to others in the meeting";
 
     function injectFloatingClock() {
+        if (document.getElementById('floatingClock') !== null) {
+            return;
+        }
+
         // Create the clock div
         const clockDiv = document.createElement('div');
         clockDiv.id = 'floatingClock';
