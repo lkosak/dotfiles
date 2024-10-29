@@ -31,7 +31,7 @@
         clockDiv.style.letterSpacing = '.2px';
         clockDiv.style.textShadow = '0 1px 2px rgba(0, 0, 0, .6), 0 0 2px rgba(0, 0, 0, .3)';
         clockDiv.style.fontFamily = '"Google Sans", Roboto, Arial, sans-serif';
-        clockDiv.style.padding = '10px';
+        clockDiv.style.padding = '15px';
         clockDiv.style.zIndex = '10000'; // Ensure it's on top of everything
         document.body.appendChild(clockDiv);
 
