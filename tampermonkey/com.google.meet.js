@@ -23,14 +23,14 @@
         clockDiv.id = 'floatingClock';
         clockDiv.style.position = 'fixed';
         clockDiv.style.top = '0';
-        clockDiv.style.left = '0';
-        // clockDiv.style.backgroundColor = 'rgba(0,0,0,.25)'; // Semi-transparent black
+        clockDiv.style.right = '0';
+        // clockDiv.style.backgroundColor = 'rgba(0,0,0,.20)'; // Semi-transparent black
         clockDiv.style.color = 'white';
-        clockDiv.style.fontSize = '.875rem';
+        clockDiv.style.fontSize = '1rem';
         clockDiv.style.fontWeight = '500';
         clockDiv.style.letterSpacing = '.2px';
         clockDiv.style.textShadow = '0 1px 2px rgba(0, 0, 0, .6), 0 0 2px rgba(0, 0, 0, .3)';
-        clockDiv.style.fontFamily = '"Google Sans", Roboto, Arial, sans-serif';
+        clockDiv.style.fontFamily = '"Inconsolata", Roboto, Arial, sans-serif';
         clockDiv.style.padding = '15px';
         clockDiv.style.zIndex = '10000'; // Ensure it's on top of everything
         document.body.appendChild(clockDiv);
