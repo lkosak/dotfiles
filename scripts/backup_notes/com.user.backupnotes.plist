@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.user.backupnotes</string>
+
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/lkosak/scripts/backup_notes/run_backup_notes.sh</string>
+        </array>
+
+        <key>StartInterval</key>
+        <integer>3600</integer> <!-- Runs every hour (3600 seconds) -->
+
+        <key>RunAtLoad</key>
+        <true/>
+    </dict>
+</plist>

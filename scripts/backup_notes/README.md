@@ -4,19 +4,36 @@
 python3 -m venv $HOME/local_python_env
 ```
 
-#Activate the environment:
+## Activate the environment:
 
 ```
 source $HOME/local_python_env/bin/activate
 ```
 
-Install required packages:
+## Install required packages:
 
 ```
 pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client zipfile36
 ```
 
-# Set up a GCC Services Account:
+# Authenticate the script
+
+* Set up a GCC Services Account (see below)
+* Download the JSON credentials file and save to $HOME/google-credentials.json
+
+# Set variables
+
+* `FOLDER_ID`: Set to the Google Drive folder ID of the folder in which you'd like to save backups.
+
+# Schedule to run regularly
+
+```
+mkdir ~/Library/LaunchAgents
+ln -s /path/to/com.user.backupnotes.plist $HOME/Library/LaunchAgents/com.user.backupnotes.plist
+launchctl load ~/Library/LaunchAgents/com.user.backupnotes.plist
+```
+
+# Appendix A: Set up a GCC Services Account:
 
 Using a **service account** for Google Drive API access is a great option, especially if you’re building an automated process that doesn’t require user interaction. Here’s how to set up and use a service account to access Google Drive:
 
