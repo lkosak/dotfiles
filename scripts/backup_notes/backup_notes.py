@@ -7,7 +7,7 @@ from googleapiclient.http import MediaFileUpload
 
 # Google Drive API setup
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
-CREDENTIALS_FILE = '/Users/lkosak/google-credentials.json'  # Path to your credentials.json
+CREDENTIALS_FILE = os.path.expanduser('~/google-credentials.json')
 
 def authenticate_gdrive():
     creds = service_account.Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
@@ -17,7 +17,7 @@ def authenticate_gdrive():
 SOURCE_FILE = os.path.expanduser("~/Library/Group Containers/group.com.apple.notes")
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 ZIP_FILENAME = f"group.com.apple.notes_backup_{TIMESTAMP}.zip"
-FOLDER_ID = '1HOK6bczhiEjhnbmu1rGzspa3KagTACiy'  # Replace with your specific Google Drive folder ID
+FOLDER_ID = '1HOK6bczhiEjhnbmu1rGzspa3KagTACiy' # Replace with your specific Google Drive folder ID
 
 # Compress the file
 with zipfile.ZipFile(ZIP_FILENAME, 'w') as zipf:
@@ -39,7 +39,7 @@ def upload_to_gdrive(file_name):
 if os.path.exists(SOURCE_FILE):
     print(f"Backing up {SOURCE_FILE} as {ZIP_FILENAME}...")
     upload_to_gdrive(ZIP_FILENAME)
-    os.remove(ZIP_FILENAME)  # Optionally delete the local zip file after upload
+    os.remove(ZIP_FILENAME)
     print("Backup complete.")
 else:
     print("Source file does not exist.")
