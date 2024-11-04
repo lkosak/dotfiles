@@ -19,7 +19,7 @@ pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-pyt
 # Authenticate the script
 
 * Set up a GCC Services Account (see below)
-* Download the JSON credentials file and save to $HOME/google-credentials.json
+* Download the JSON credentials file and save to ~/.ssh/google-credentials.json
 
 # Set variables
 

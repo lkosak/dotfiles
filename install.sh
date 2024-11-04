@@ -59,6 +59,5 @@ do
  fi
 done
 
-
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Sites/dotfiles"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
