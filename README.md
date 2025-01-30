@@ -7,11 +7,10 @@ A collection of mojo-preserving configuration files. Makes a handsome environmen
 
 **git submodules** -- all kinds of external dependencies are referenced as git submodules. Just run `git submodule init` before running the installer.
 
-## Random hacks
+## Random tricks
 
-## Preventing the "Slack links open in Safari website added to dock" issue
+### Generating a base64 encoded string from a png
 
-* `brew install duti`
-* `duti -s com.google.Chrome com.apple.web-internet-location all`
-
-([Source](https://www.reddit.com/r/MacOS/comments/10fj13w/comment/j51wt66/))
+```
+openssl base64 -in notebook-favicon.png | tr -d '\n' | pbcopy
+```
