@@ -6,6 +6,8 @@
   precomposeunicode = true
 	excludesfile = /Users/lkosak/.gitignore_global
   sparseCheckout = true
+	untrackedcache = true
+	fsmonitor = true
 [color]
   status = auto
   diff = auto
