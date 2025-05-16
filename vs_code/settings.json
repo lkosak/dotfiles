@@ -45,4 +45,5 @@
   "terminal.external.linuxExec": "xterm-256color",
   "terminal.external.osxExec": "iTerm.app",
   "window.zoomLevel": 0,
+  "go.delveConfig": {},
 }

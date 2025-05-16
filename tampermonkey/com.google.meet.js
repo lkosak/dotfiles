@@ -12,6 +12,37 @@
 (function() {
     'use strict';
     const TOOLTIP_TEXT = "You are still sending your video to others in the meeting";
+    const JOIN_BUTTON_CTAS = ['join now', 'switch here'];
+
+    // Helper to find the "Join now" button
+    function findJoinButton() {
+        const buttons = document.querySelectorAll('button');
+        for (let btn of buttons) {
+            const btnText = btn.innerText.trim().toLowerCase();
+
+            if (JOIN_BUTTON_CTAS.includes(btnText)) {
+                return btn;
+            }
+        }
+        return null;
+    }
+
+    // Listen for Enter key press
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            const players = document.querySelectorAll('[data-participant-id]');
+
+            if (players.length !== 0) {
+                console.debug("In a call; no-op");
+                return;
+            }
+
+            const joinButton = findJoinButton();
+            if (joinButton && !joinButton.disabled) {
+                joinButton.click();
+            }
+        }
+    });
 
     function injectFloatingClock() {
         if (document.getElementById('floatingClock') !== null) {
@@ -68,7 +99,7 @@
             return;
         }
 
-        const btnVfx = document.querySelector("[aria-label='Apply visual effects']");
+        const btnVfx = document.querySelector("[aria-label='Backgrounds and effects']");
 
         if (btnVfx == null) {
             console.error("Can't find visual effects button for current user");
@@ -117,5 +148,5 @@
         }
     }, 500);
 
-    console.log("Lou's magic monkeypatches installed");
+    console.log("Lou's Marvelous Google Meet Hacks installed");
 })();
