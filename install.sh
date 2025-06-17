@@ -32,6 +32,9 @@ do
   ln -sf "$DIR/.config/zsh/$FNAME" "$ZDOTDIR/$FNAME"
 done
 
+# Install oh-my-zsh
+CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # Link everything else to home dir
 for f in $FILES
 do
