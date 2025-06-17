@@ -7,7 +7,7 @@
 	excludesfile = /Users/lkosak/.gitignore_global
   sparseCheckout = true
 	untrackedcache = true
-	fsmonitor = true
+	fsMonitor = false
 [color]
   status = auto
   diff = auto
