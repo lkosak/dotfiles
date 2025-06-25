@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$ZDOTDIR/.oh-my-zsh
+ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -40,7 +40,7 @@ unsetopt correct_all
 setopt noautomenu
 
 # History FOREVER
-HISTFILE=$ZDOTDIR/.zshistory
+HISTFILE=$HOME/.zshistory
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt append_history
@@ -69,7 +69,7 @@ stty -ixon -ixoff
 export EDITOR=vim
 
 # Support for a .zlocal file that is outside of version control
-LOCALCONF="$ZDOTDIR/.zlocal"
+LOCALCONF="$HOME/.zlocal"
 [ -f $LOCALCONF ] && source $LOCALCONF
 
 # Performance hack for slow repos
