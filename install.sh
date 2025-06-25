@@ -15,22 +15,15 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .config .git .gitignore .gitmodules README.md update_submodules.sh solarized vs_code com.googlecode.iterm2.plist tampermonkey)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey)
 
 VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VS_CODE_ROOT"
 ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
 
 # Set up ZSH path and link files
-ZDOTDIR="$HOME/.config/zsh"
+ZDOTDIR="$HOME/.zsh"
 mkdir -p "$ZDOTDIR"
-
-ZSH_FILES="$DIR/.config/zsh/*"
-for f in $ZSH_FILES
-do
-  FNAME=$(basename $f)
-  ln -sf "$DIR/.config/zsh/$FNAME" "$ZDOTDIR/$FNAME"
-done
 
 # Install oh-my-zsh
 CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
