@@ -1,3 +1,16 @@
+# Place this early in your .zshrc
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+
+# Make sure the directory exists
+mkdir -p "$(dirname $ZSH_COMPDUMP)"
+
+# Then initialize completion
+#autoload -Uz compinit
+#compinit
+
+# Remove stale compdump files if they exist
+[[ -f ${ZSH_COMPDUMP}.zwc.old ]] && rm -f ${ZSH_COMPDUMP}.zwc.old
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 

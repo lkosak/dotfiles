@@ -21,10 +21,6 @@ VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VS_CODE_ROOT"
 ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
 
-# Set up ZSH path and link files
-ZDOTDIR="$HOME/.zsh"
-mkdir -p "$ZDOTDIR"
-
 # Install oh-my-zsh
 CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
