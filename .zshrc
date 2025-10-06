@@ -56,8 +56,9 @@ setopt noautomenu
 HISTFILE=$HOME/.zshistory
 HISTSIZE=1000000
 SAVEHIST=1000000
-setopt append_history
-unsetopt share_history
+setopt APPEND_HISTORY       # don’t overwrite, append instead
+setopt INC_APPEND_HISTORY   # write commands as soon as they’re run
+setopt SHARE_HISTORY        # share across all sessions
 
 # Pathypath
 export PATH="/opt/homebrew/bin:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"

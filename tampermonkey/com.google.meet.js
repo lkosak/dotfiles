@@ -13,6 +13,8 @@
     'use strict';
     const TOOLTIP_TEXT = "You are still sending your video to others in the meeting";
     const JOIN_BUTTON_CTAS = ['join now', 'switch here'];
+    const FLOATING_CLOCK_ID = 'floatingClock';
+    var clockUpdateInterval;
 
     // Helper to find the "Join now" button
     function findJoinButton() {
@@ -45,16 +47,15 @@
     });
 
     function injectFloatingClock() {
-        if (document.getElementById('floatingClock') !== null) {
-            return;
-        }
+        const mainContainer = document.querySelector("main");
 
         // Create the clock div
         const clockDiv = document.createElement('div');
-        clockDiv.id = 'floatingClock';
-        clockDiv.style.position = 'fixed';
-        clockDiv.style.top = '0';
-        clockDiv.style.left = '0';
+        clockDiv.id = FLOATING_CLOCK_ID;
+        clockDiv.style.position = 'absolute';
+        clockDiv.style.bottom = '16px';
+        clockDiv.style.left = '50%';
+        clockDiv.style.transform = 'translateX(-50%)';
         // clockDiv.style.backgroundColor = 'rgba(0,0,0,.20)'; // Semi-transparent black
         clockDiv.style.color = 'white';
         clockDiv.style.fontSize = '1rem';
@@ -62,9 +63,8 @@
         clockDiv.style.letterSpacing = '.2px';
         clockDiv.style.textShadow = '0 1px 2px rgba(0, 0, 0, .6), 0 0 2px rgba(0, 0, 0, .3)';
         clockDiv.style.fontFamily = '"Google Sans", Roboto, Arial, sans-serif';
-        clockDiv.style.padding = '15px';
         clockDiv.style.zIndex = '10000'; // Ensure it's on top of everything
-        document.body.appendChild(clockDiv);
+        mainContainer.appendChild(clockDiv);
 
         // Function to update the time
         function updateClock() {
@@ -77,13 +77,14 @@
 
         // Update the clock every second
         updateClock();
-        setInterval(updateClock, 1000);
+        const interval = setInterval(updateClock, 1000);
 
-        console.log("Injected floating clock");
+        console.debug("Injected floating clock");
+
+        return interval;
     }
 
-    // Autohide the self-view the first time it appears
-    const playerInterval = setInterval(() => {
+    setInterval(() => {
         const players = document.querySelectorAll('[data-participant-id]');
 
         if (players.length == 0) {
@@ -91,8 +92,23 @@
             return;
         }
 
-        // Call the function to inject the clock
-        injectFloatingClock();
+        const floatingClock = document.getElementById(FLOATING_CLOCK_ID);
+
+        if (floatingClock === null) {
+            console.debug("No clock present; injecting");
+            clearInterval(clockUpdateInterval);
+            clockUpdateInterval = injectFloatingClock();
+        }
+    }, 1000);
+
+    // Autohide the self-view the first time it appears
+    const autoHideInterval = setInterval(() => {
+        const players = document.querySelectorAll('[data-participant-id]');
+
+        if (players.length == 0) {
+            console.debug("Not in a call; no-op");
+            return;
+        }
 
         if (players.length == 1) {
             console.debug("Alone in call; no-op");
@@ -120,6 +136,7 @@
             return;
         }
 
+        // Open the "more options" menu
         btnOptions.click();
 
         setTimeout(() => {
@@ -131,7 +148,7 @@
             }
 
             btnMinimize.click();
-            clearInterval(playerInterval);
+            clearInterval(autoHideInterval);
         }, 100);
     }, 1000);
 
