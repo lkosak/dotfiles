@@ -47,13 +47,13 @@
     });
 
     function injectFloatingClock() {
-        const mainContainer = document.querySelector("main");
+        const parentContainer = document.querySelector("body");
 
         // Create the clock div
         const clockDiv = document.createElement('div');
         clockDiv.id = FLOATING_CLOCK_ID;
         clockDiv.style.position = 'absolute';
-        clockDiv.style.bottom = '16px';
+        clockDiv.style.bottom = '100px';
         clockDiv.style.left = '50%';
         clockDiv.style.transform = 'translateX(-50%)';
         // clockDiv.style.backgroundColor = 'rgba(0,0,0,.20)'; // Semi-transparent black
@@ -64,7 +64,7 @@
         clockDiv.style.textShadow = '0 1px 2px rgba(0, 0, 0, .6), 0 0 2px rgba(0, 0, 0, .3)';
         clockDiv.style.fontFamily = '"Google Sans", Roboto, Arial, sans-serif';
         clockDiv.style.zIndex = '10000'; // Ensure it's on top of everything
-        mainContainer.appendChild(clockDiv);
+        parentContainer.appendChild(clockDiv);
 
         // Function to update the time
         function updateClock() {
