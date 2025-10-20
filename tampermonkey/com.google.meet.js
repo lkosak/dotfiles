@@ -14,7 +14,8 @@
     const TOOLTIP_TEXT = "You are still sending your video to others in the meeting";
     const JOIN_BUTTON_CTAS = ['join now', 'switch here'];
     const FLOATING_CLOCK_ID = 'floatingClock';
-    var clockUpdateInterval;
+    const USER_FULL_NAME = 'Lou Kosak';
+    var clockTickInterval;
 
     // Helper to find the "Join now" button
     function findJoinButton() {
@@ -46,6 +47,7 @@
         }
     });
 
+    // Inject clock and return interval for "ticking"
     function injectFloatingClock() {
         const parentContainer = document.querySelector("body");
 
@@ -84,6 +86,7 @@
         return interval;
     }
 
+    // Clock management; injects clock and re-injects when removed from DOM.
     setInterval(() => {
         const players = document.querySelectorAll('[data-participant-id]');
 
@@ -96,8 +99,8 @@
 
         if (floatingClock === null) {
             console.debug("No clock present; injecting");
-            clearInterval(clockUpdateInterval);
-            clockUpdateInterval = injectFloatingClock();
+            clearInterval(clockTickInterval);
+            clockTickInterval = injectFloatingClock();
         }
     }, 1000);
 
@@ -115,24 +118,10 @@
             return;
         }
 
-        const btnVfx = document.querySelector("[aria-label='Backgrounds and effects']");
-
-        if (btnVfx == null) {
-            console.error("Can't find visual effects button for current user");
-            return;
-        }
-
-        const player = btnVfx.closest('[data-participant-id]');
-
-        if (player == null) {
-            console.error("Current user's player elem not found");
-            return;
-        }
-
-        const btnOptions = player.querySelector('[aria-label*="More options"]');
+        const btnOptions = document.querySelector('[aria-label="More options for ' + USER_FULL_NAME + '"]');
 
         if (btnOptions == null) {
-            console.error('More options button not found');
+            console.error('More options button not found. Self-view already hidden, or DOM has changed.');
             return;
         }
 
