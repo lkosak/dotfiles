@@ -129,7 +129,7 @@
             return;
         }
 
-        const btnOptions = player.querySelector('[aria-label="More options"]');
+        const btnOptions = player.querySelector('[aria-label*="More options"]');
 
         if (btnOptions == null) {
             console.error('More options button not found');
