@@ -118,27 +118,11 @@
             return;
         }
 
-        const btnOptions = document.querySelector('[aria-label="More options for ' + USER_FULL_NAME + '"]');
+        // Use keyboard shortcut to hide self-view
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'm', metaKey: true, ctrlKey: true }));
 
-        if (btnOptions == null) {
-            console.error('More options button not found. Self-view already hidden, or DOM has changed.');
-            return;
-        }
-
-        // Open the "more options" menu
-        btnOptions.click();
-
-        setTimeout(() => {
-            const btnMinimize = document.querySelector('[aria-label="Minimize"]:not([aria-disabled=true])');
-
-            if (btnMinimize == null) {
-                console.error('Minimize button not found');
-                return;
-            }
-
-            btnMinimize.click();
-            clearInterval(autoHideInterval);
-        }, 100);
+        // Stop trying to close now that it has been closed once.
+        clearInterval(autoHideInterval);
     }, 1000);
 
     // Snip the "your camera is still running" tooltip any time it pops up
