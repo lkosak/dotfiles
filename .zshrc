@@ -1,6 +1,9 @@
 # Place this early in your .zshrc
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
+# Ensure UTF-8
+LANG=en_US.UTF-8
+
 # Make sure the directory exists
 mkdir -p "$(dirname $ZSH_COMPDUMP)"
 
