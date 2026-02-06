@@ -55,7 +55,7 @@
         const clockDiv = document.createElement('div');
         clockDiv.id = FLOATING_CLOCK_ID;
         clockDiv.style.position = 'absolute';
-        clockDiv.style.bottom = '100px';
+        clockDiv.style.top = '25px';
         clockDiv.style.left = '50%';
         clockDiv.style.transform = 'translateX(-50%)';
         // clockDiv.style.backgroundColor = 'rgba(0,0,0,.20)'; // Semi-transparent black
