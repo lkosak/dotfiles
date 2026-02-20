@@ -51,7 +51,7 @@
             setOpen(true);
 
             // Auto-hide Raw Notes
-            if (keyText.toLowerCase() === "raw notes") {
+            if (keyText.toLowerCase().includes("raw notes")) {
                 setOpen(false);
             }
 
