@@ -15,16 +15,11 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey claude-skills)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey)
 
 VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VS_CODE_ROOT"
 ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
-
-# Link Claude skills
-CLAUDE_ROOT="$HOME/.claude"
-mkdir -p "$CLAUDE_ROOT"
-ln -sf "$DIR/claude-skills" "$CLAUDE_ROOT/skills"
 
 # Install oh-my-zsh
 CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
