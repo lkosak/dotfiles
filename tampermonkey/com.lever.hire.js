@@ -84,5 +84,32 @@
         }
     }
 
-watchForInterviewStory();
+    watchForInterviewStory();
+
+     function handleKeydown(e) {
+         if (e.metaKey && e.key === "ArrowDown") {
+             e.preventDefault();
+             e.stopPropagation();
+             e.stopImmediatePropagation();
+
+             const container = document.querySelector(".height-full .absolute");
+             container.scrollTo({
+                 top: container.scrollHeight,
+             });
+         }
+
+         if (e.metaKey && e.key === "ArrowUp") {
+             e.preventDefault();
+             e.stopPropagation();
+             e.stopImmediatePropagation();
+
+             const container = document.querySelector(".height-full .absolute");
+             container.scrollTo({
+                 top: 0,
+             });
+         }
+     }
+
+    // Use capture phase so we intercept before site handlers
+    window.addEventListener("keydown", handleKeydown, true);
 })();
