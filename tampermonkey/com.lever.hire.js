@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Full-width Lever
+// @name         Lou's lovely Lever hacks
 // @namespace    http://tampermonkey.net/
 // @version      2026-02-20
-// @description  try to take over the world!
+// @description  It's the worst!
 // @author       You
 // @match        https://hire.lever.co/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=lever.co
@@ -86,29 +86,36 @@
 
     watchForInterviewStory();
 
-     function handleKeydown(e) {
-         if (e.metaKey && e.key === "ArrowDown") {
-             e.preventDefault();
-             e.stopPropagation();
-             e.stopImmediatePropagation();
+    function isEditableFocused() {
+        const el = document.activeElement;
+        if (!el) return false;
 
-             const container = document.querySelector(".height-full .absolute");
-             container.scrollTo({
-                 top: container.scrollHeight,
-             });
-         }
+        // If focus is on (or inside) an element that should receive arrow keys, bail.
+        const editable = el.closest?.(
+            'input, textarea, select, [contenteditable=""], [contenteditable="true"], [contenteditable="plaintext-only"]'
+        );
+        return !!editable;
+    }
 
-         if (e.metaKey && e.key === "ArrowUp") {
-             e.preventDefault();
-             e.stopPropagation();
-             e.stopImmediatePropagation();
+    function handleKeydown(e) {
+        // Don't mess with cursor keys when user is typing/editing
+        if (isEditableFocused()) return;
 
-             const container = document.querySelector(".height-full .absolute");
-             container.scrollTo({
-                 top: 0,
-             });
-         }
-     }
+        const isDown = e.metaKey && e.key === "ArrowDown";
+        const isUp   = e.metaKey && e.key === "ArrowUp";
+        if (!isDown && !isUp) return;
+
+        const container = document.querySelector(".height-full .absolute");
+        if (!container) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        container.scrollTo({
+            top: isDown ? container.scrollHeight : 0,
+        });
+    }
 
     // Use capture phase so we intercept before site handlers
     window.addEventListener("keydown", handleKeydown, true);
