@@ -64,7 +64,7 @@ setopt INC_APPEND_HISTORY   # write commands as soon as they’re run
 setopt SHARE_HISTORY        # share across all sessions
 
 # Pathypath
-export PATH="/opt/homebrew/bin:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 # only use local git files for autocompletion (speed tweak)
 __git_files () {
