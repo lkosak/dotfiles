@@ -23,7 +23,11 @@ ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
 
 CLAUDE_ROOT="$HOME/.claude"
 mkdir -p "$CLAUDE_ROOT"
-ln -s "$DIR/.claude/settings.json" "$CLAUDE_ROOT/settings.json"
+if [ -e "$CLAUDE_ROOT/settings.json" ] && [ ! -h "$CLAUDE_ROOT/settings.json" ]; then
+  echo "WARNING: $CLAUDE_ROOT/settings.json exists as a regular file, not a symlink; skipping"
+else
+  ln -sf "$DIR/.claude/settings.json" "$CLAUDE_ROOT/settings.json"
+fi
 
 # Install oh-my-zsh
 CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -46,7 +50,7 @@ do
        echo "$HOME/$FNAME exists but identical; replacing with link"
        ln -sf $f $HOME/$FNAME
      else
-       echo "$HOME/$FNAME already exists; skipping"
+       echo "WARNING: $HOME/$FNAME is a regular file (not a symlink) with different contents; skipping"
      fi
    else
      echo "Linking $f to $HOME/$FNAME"
