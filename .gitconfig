@@ -5,7 +5,6 @@
   editor = /usr/bin/vim
   precomposeunicode = true
 	excludesfile = /Users/lkosak/.gitignore_global
-  sparseCheckout = true
 	untrackedcache = true
 	fsMonitor = false
 [color]
