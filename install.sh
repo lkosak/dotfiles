@@ -15,48 +15,53 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey .claude)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey .claude .config)
 
-VS_CODE_ROOT="$HOME/Library/Application Support/Code/User"
-mkdir -p "$VS_CODE_ROOT"
-ln -sf "$DIR/vs_code/settings.json" "$VS_CODE_ROOT/settings.json"
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+RESET='\033[0m'
 
-CLAUDE_ROOT="$HOME/.claude"
-mkdir -p "$CLAUDE_ROOT"
-if [ -e "$CLAUDE_ROOT/settings.json" ] && [ ! -h "$CLAUDE_ROOT/settings.json" ]; then
-  echo "WARNING: $CLAUDE_ROOT/settings.json exists as a regular file, not a symlink; skipping"
-else
-  ln -sf "$DIR/.claude/settings.json" "$CLAUDE_ROOT/settings.json"
-fi
+link_file() {
+  local src="$1"
+  local dest="$2"
+  mkdir -p "$(dirname "$dest")"
+  if [ -h "$dest" ]; then
+    echo -e "${YELLOW}$dest already linked; skipping${RESET}"
+  elif [ -d "$dest" ]; then
+    echo -e "${RED}$dest already exists as directory; skipping${RESET}"
+  elif [ -e "$dest" ]; then
+    diff "$dest" "$src" > /dev/null
+    if [ $? -eq 0 ]; then
+      echo -e "${YELLOW}$dest exists but identical; replacing with link${RESET}"
+      ln -sf "$src" "$dest"
+    else
+      echo -e "${RED}$dest already exists with different content; skipping${RESET}"
+    fi
+  else
+    echo -e "${GREEN}Linking $src to $dest${RESET}"
+    ln -sf "$src" "$dest"
+  fi
+}
+
+link_file "$DIR/vs_code/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+link_file "$DIR/.claude/settings.json" "$HOME/.claude/settings.json"
+link_file "$DIR/.config/ghostty/config.ghostty" "$HOME/.config/ghostty/config.ghostty"
 
 # Install oh-my-zsh
-CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  echo -e "${YELLOW}$HOME/.oh-my-zsh already exists; skipping oh-my-zsh install${RESET}"
+else
+  CHSH=no RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # Link everything else to home dir
 for f in $FILES
 do
- # Ignore this script
- FNAME=$(basename $f)
-
- if [[ ! ${exclusions[@]} =~ "$FNAME" ]]; then
-   if [ -h $HOME/$FNAME ]; then
-     echo "$HOME/$FNAME already linked; skipping"
-   elif [ -d $HOME/$FNAME ]; then
-     echo "$HOME/$FNAME already exists; skipping"
-   elif [ -e $HOME/$FNAME ]; then
-     diff $HOME/$FNAME $f > /dev/null
-
-     if [ $? -eq 0 ]; then
-       echo "$HOME/$FNAME exists but identical; replacing with link"
-       ln -sf $f $HOME/$FNAME
-     else
-       echo "WARNING: $HOME/$FNAME is a regular file (not a symlink) with different contents; skipping"
-     fi
-   else
-     echo "Linking $f to $HOME/$FNAME"
-     ln -s $f $HOME/$FNAME
-   fi
- fi
+  FNAME=$(basename $f)
+  if [[ ! ${exclusions[@]} =~ "$FNAME" ]]; then
+    link_file "$f" "$HOME/$FNAME"
+  fi
 done
 
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Sites/dotfiles"

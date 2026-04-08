@@ -1,16 +1,10 @@
 " Set colorscheme
+if has("termguicolors")
+  set termguicolors
+endif
 set bg=dark
-
-try
-  colorscheme solarized
-catch /^Vim\%((\a\+)\)\=:E185/
-  " no-op
-endtry
-
-" Load pathogen
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
+let g:tokyonight_style = 'night' " available: night, storm
+colorscheme tokyonight
 
 " Basic vim settings
 syntax on
@@ -33,7 +27,7 @@ set ttyfast
 set ruler
 set laststatus=2
 set number
-set shell=/bin/sh " work with RVM I guess
+set shell=/bin/zsh " work with RVM I guess
 
 " More human backspace behavior
 set backspace=indent,eol,start whichwrap+=<,>,[,]
@@ -43,7 +37,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set colorcolumn=80,100
+"set colorcolumn=80,100
 
 " use system clipboard
 set clipboard=unnamed
