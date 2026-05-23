@@ -15,7 +15,7 @@ MY_FNAME=$(basename $0)
 shopt -s dotglob
 
 FILES="$DIR/*"
-exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey .claude .config)
+exclusions=($MY_FNAME .git .gitignore .gitmodules README.md vs_code com.googlecode.iterm2.plist tampermonkey .claude .config LaunchAgents)
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -47,6 +47,8 @@ link_file() {
 link_file "$DIR/vs_code/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 link_file "$DIR/.claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DIR/.config/ghostty/config.ghostty" "$HOME/.config/ghostty/config.ghostty"
+link_file "$DIR/LaunchAgents/com.local.KeyRemapping.plist" "$HOME/Library/LaunchAgents/com.local.KeyRemapping.plist"
+link_file "$DIR/LaunchAgents/com.local.PreferredMic.plist" "$HOME/Library/LaunchAgents/com.local.PreferredMic.plist"
 
 # Install oh-my-zsh
 if [ -d "$HOME/.oh-my-zsh" ]; then
@@ -75,19 +77,13 @@ defaults write com.googlecode.iterm2.plist NoSyncNeverRemindPrefsChangesLostForF
 
 echo "Applying macOS preferences..."
 
-# Keyboard: Remap Caps Lock to Control for all keyboards
-# Src 30064771129 = Caps Lock, Dst 30064771300 = Control
-MODIFIER_MAPPING='
-{
-    HIDKeyboardModifierMappingDst = 30064771300;
-    HIDKeyboardModifierMappingSrc = 30064771129;
-}
-'
-for key in \
-  "com.apple.keyboard.modifiermapping.1452-834-0" \
-  "com.apple.keyboard.modifiermapping.alt_handler_id-49" \
-  "com.apple.keyboard.modifiermapping.alt_handler_id-106"; do
-  defaults -currentHost write -g "$key" -array "$MODIFIER_MAPPING"
+# Keyboard: Remap Caps Lock to Control for all keyboards via hidutil launch agent
+# (Handled by LaunchAgents/com.local.KeyRemapping.plist, linked above)
+for agent in com.local.KeyRemapping com.local.PreferredMic; do
+  if launchctl list "$agent" &>/dev/null; then
+    launchctl unload "$HOME/Library/LaunchAgents/$agent.plist" 2>/dev/null
+  fi
+  launchctl load "$HOME/Library/LaunchAgents/$agent.plist"
 done
 
 # Keyboard: Fast key repeat rate (lower = faster, default is 6)

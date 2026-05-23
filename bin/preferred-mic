@@ -1,0 +1,10 @@
+#!/bin/bash
+# Switch to the DJI Mic when available.
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+CURRENT=$(SwitchAudioSource -t input -c)
+
+if [ "$CURRENT" != "Wireless Mic Rx" ] && SwitchAudioSource -t input -a | grep -qF "Wireless Mic Rx"; then
+  SwitchAudioSource -t input -s "Wireless Mic Rx"
+fi
