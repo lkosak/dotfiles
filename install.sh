@@ -79,7 +79,7 @@ echo "Applying macOS preferences..."
 
 # Keyboard: Remap Caps Lock to Control for all keyboards via hidutil launch agent
 # (Handled by LaunchAgents/com.local.KeyRemapping.plist, linked above)
-for agent in com.local.KeyRemapping com.local.PreferredMic; do
+for agent in com.local.KeyRemapping; do
   if launchctl list "$agent" &>/dev/null; then
     launchctl unload "$HOME/Library/LaunchAgents/$agent.plist" 2>/dev/null
   fi
